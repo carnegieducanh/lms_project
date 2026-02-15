@@ -245,6 +245,8 @@ Thông báo này nghĩa là container đã chạy nhưng process bên trong tho�
 | `could not find driver` (MySQL) | Đã có trong Dockerfile (pdo_mysql); nếu vẫn lỗi, kiểm tra lại build. |
 | `Class "CloudinaryLabs\..." not found` | Build lại (Composer install); hoặc kiểm tra `composer.json` có `cloudinary-labs/cloudinary-laravel`. |
 
+**Nếu log có "WARN: Migration failed sau 6 lần thử":** Nghĩa là kết nối tới MySQL (Railway) thất bại. Sau khi push code mới và redeploy, trong log sẽ có thêm **"--- Lỗi chi tiết ---"** và nội dung lỗi thật (ví dụ `SQLSTATE[HY000] [2002]` hoặc `Access denied`). Kiểm tra **MYSQL_PUBLIC_URL** trên Render: phải là URL **public** (host dạng `xxx.proxy.rlwy.net`). Nếu mật khẩu có ký tự đặc biệt (`@`, `#`, `:`), thử bỏ MYSQL_PUBLIC_URL và thay bằng 5 biến: **DB_HOST**, **DB_PORT**, **DB_DATABASE**, **DB_USERNAME**, **DB_PASSWORD** (lấy từ Railway).
+
 Sau khi sửa Environment Variables, nhớ **Save** rồi **Manual Deploy** (hoặc push commit) để Render chạy lại.
 
 ---
