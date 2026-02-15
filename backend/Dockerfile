@@ -29,6 +29,10 @@ COPY . .
 # Cài dependency PHP (production)
 RUN composer install --no-dev --no-interaction --optimize-autoloader
 
+# Quyền ghi cho storage & bootstrap/cache (tránh "Permission denied")
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache \
+    && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+
 # Script chạy khi container start: cache config, migrate, chạy Apache
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh

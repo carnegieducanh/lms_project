@@ -27,6 +27,10 @@ COPY backend .
 
 RUN composer install --no-dev --no-interaction --optimize-autoloader
 
+# Quyền ghi cho storage & bootstrap/cache (tránh "Permission denied" khi Laravel compile view/cache)
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache \
+    && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+
 COPY backend/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 ENTRYPOINT ["docker-entrypoint.sh"]
