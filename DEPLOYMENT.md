@@ -52,11 +52,13 @@ git push -u origin main
 1. Click vào service **MySQL** vừa tạo.
 2. Mở tab **Variables** hoặc **Connect**.
 3. Ghi lại (hoặc copy):
-   - `MYSQL_HOST` (hoặc `host`)
-   - `MYSQL_PORT` (thường `3306`)
-   - `MYSQL_DATABASE`
-   - `MYSQL_USER`
-   - `MYSQL_PASSWORD`
+   - `MYSQL_HOST` (hoặc `host`) mysql.railway.internal
+   - `MYSQL_PORT` (thường `3306`) 3306
+   - `MYSQL_DATABASE` railway
+   - `MYSQL_URL` mysql://root:LYkLAGpMdcjdsftRypIUSABqVHmfzEhR@mysql.railway.internal:3306/railway
+   - `MYSQL_USER` root
+   - `MYSQL_PASSWORD` LYkLAGpMdcjdsftRypIUSABqVHmfzEhR
+   - `MYSQL_PUBLIC_URL` LYkLAGpMdcjdsftRypIUSABqVHmfzEhR
    - **Connection URL** dạng:  
      `mysql://user:password@host:port/railway`
 
@@ -121,11 +123,11 @@ Code trong project đã hỗ trợ: khi có các biến Cloudinary, ảnh khóa 
    - **Name:** `lms-backend` (hoặc tên bạn muốn).
    - **Region:** chọn gần user (ví dụ Singapore).
    - **Branch:** `main`.
-   - **Root Directory:** **Để trống** (không điền `backend`). Dockerfile tại **root repo** sẽ copy thư mục `backend/` vào image. Nếu điền `backend`, Render có thể báo *"Root directory backend does not exist"*.
-   - **Runtime:** **Docker**.
+   - **Root Directory:** **`backend`** (bắt buộc vì mã Laravel nằm trong thư mục `backend`; Dockerfile nằm tại `backend/Dockerfile`).
+   - **Runtime:** **Docker** (Dockerfile đã có sẵn trong `backend`).
    - **Instance Type:** **Free**.
 
-   **Lưu ý:** Repo GitHub phải là **toàn bộ project** (root có thư mục `backend/` và `frontend/`). File **Dockerfile** và **render.yaml** nằm ở root repo. Trong Render Dashboard, nếu service đang set Root Directory = `backend`, hãy **xóa** (để trống) rồi redeploy.
+   Nếu bạn dùng **render.yaml** (Blueprint) ở root repo, đã cấu sẵn `rootDir: backend`; chỉ cần connect repo và Render sẽ đọc file đó.
 
 ### 4.2 Biến môi trường (Environment Variables)
 
@@ -228,6 +230,24 @@ Sau khi thêm, **Redeploy** lại project để biến có hiệu lực.
 - **Railway:** Free tier có giới hạn usage; theo dõi trong dashboard.
 - **Cloudinary:** Free tier có giới hạn storage và bandwidth; đủ cho demo và dự án nhỏ.
 - **Vercel:** Free tier thường đủ cho frontend cá nhân/demo.
+
+### 6.4 Xử lý lỗi deploy: "Exited with status 1"
+
+Thông báo này nghĩa là container đã chạy nhưng process bên trong thoát với mã lỗi 1. Cần xem **log đầy đủ** để biết lỗi cụ thể:
+
+1. Trên Render: vào service **lms-backend** → tab **Logs** (hoặc **Events** → click vào deploy vừa chạy).
+2. Kéo xuống **phần Runtime** (sau khi build xong). Dòng **ngay trước** "Exited with status 1" thường là lỗi thật.
+
+**Một số nguyên nhân thường gặp:**
+
+| Lỗi trong log | Cách xử lý |
+|----------------|------------|
+| `No application encryption key` / `APP_KEY` | Thêm biến **APP_KEY** trong Environment (chạy `php artisan key:generate --show` ở máy local trong thư mục `backend`, copy chuỗi `base64:...` vào). |
+| `SQLSTATE[HY000] [2002]` / Connection refused / Connection timed out | Kiểm tra **MYSQL_PUBLIC_URL**: dùng URL **public** từ Railway (host `*.proxy.rlwy.net`), không dùng `mysql.railway.internal`. Đảm bảo đã thêm biến trên Render. |
+| `could not find driver` (MySQL) | Đã có trong Dockerfile (pdo_mysql); nếu vẫn lỗi, kiểm tra lại build. |
+| `Class "CloudinaryLabs\..." not found` | Build lại (Composer install); hoặc kiểm tra `composer.json` có `cloudinary-labs/cloudinary-laravel`. |
+
+Sau khi sửa Environment Variables, nhớ **Save** rồi **Manual Deploy** (hoặc push commit) để Render chạy lại.
 
 ---
 

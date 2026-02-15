@@ -2,6 +2,20 @@
 
 use Illuminate\Support\Str;
 
+// Parse MySQL URL (Railway MYSQL_PUBLIC_URL) thành host, port, database, username, password
+$mysqlUrl = env('DB_URL', env('DATABASE_URL', env('MYSQL_PUBLIC_URL')));
+$mysqlParsed = [];
+if ($mysqlUrl && str_starts_with($mysqlUrl, 'mysql://')) {
+    $parsed = parse_url($mysqlUrl);
+    $mysqlParsed = [
+        'host' => $parsed['host'] ?? '127.0.0.1',
+        'port' => isset($parsed['port']) ? (string) $parsed['port'] : '3306',
+        'database' => isset($parsed['path']) ? ltrim($parsed['path'], '/') : 'laravel',
+        'username' => $parsed['user'] ?? 'root',
+        'password' => $parsed['pass'] ?? '',
+    ];
+}
+
 return [
 
     /*
@@ -44,13 +58,14 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'url' => env('DB_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'laravel'),
-            'username' => env('DB_USERNAME', 'root'),
-            'password' => env('DB_PASSWORD', ''),
-            'unix_socket' => env('DB_SOCKET', ''),
+            'url' => $mysqlUrl ?: null,
+            // Ưu tiên giá trị parse từ URL (Railway MYSQL_PUBLIC_URL) để tránh socket "No such file or directory"
+            'host' => $mysqlParsed['host'] ?? env('DB_HOST', '127.0.0.1'),
+            'port' => $mysqlParsed['port'] ?? env('DB_PORT', '3306'),
+            'database' => $mysqlParsed['database'] ?? env('DB_DATABASE', 'laravel'),
+            'username' => $mysqlParsed['username'] ?? env('DB_USERNAME', 'root'),
+            'password' => $mysqlParsed['password'] ?? env('DB_PASSWORD', ''),
+            'unix_socket' => '', // Luôn dùng TCP, không dùng socket
             'charset' => env('DB_CHARSET', 'utf8mb4'),
             'collation' => env('DB_COLLATION', 'utf8mb4_unicode_ci'),
             'prefix' => '',

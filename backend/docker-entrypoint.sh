@@ -8,6 +8,8 @@ echo "Caching routes..."
 php artisan route:cache
 
 echo "Running migrations..."
-php artisan migrate --force
+php artisan migrate --force || echo "WARN: Migration failed - kiểm tra MYSQL_PUBLIC_URL / DB. Chạy migrate thủ công sau."
+
+exec "$@"
 
 exec "$@"
