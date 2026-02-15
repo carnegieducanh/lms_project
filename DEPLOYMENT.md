@@ -58,7 +58,7 @@ git push -u origin main
    - `MYSQL_URL` mysql://root:LYkLAGpMdcjdsftRypIUSABqVHmfzEhR@mysql.railway.internal:3306/railway
    - `MYSQL_USER` root
    - `MYSQL_PASSWORD` LYkLAGpMdcjdsftRypIUSABqVHmfzEhR
-   - `MYSQL_PUBLIC_URL` LYkLAGpMdcjdsftRypIUSABqVHmfzEhR
+   - `MYSQL_PUBLIC_URL` mysql://root:LYkLAGpMdcjdsftRypIUSABqVHmfzEhR@tramway.proxy.rlwy.net:24227/railway
    - **Connection URL** dạng:  
      `mysql://user:password@host:port/railway`
 
@@ -141,7 +141,7 @@ Trong **Environment** của Web Service, thêm (key = name, value = giá trị):
 | `APP_KEY` | Laravel app key | `base64:xxx` (tạo bằng `php artisan key:generate`) |
 | `APP_URL` | URL backend trên Render | `https://lms-backend.onrender.com` (đúng URL service của bạn) |
 | `FRONTEND_URL` | URL frontend trên Vercel (để CORS) | `https://your-app.vercel.app` |
-| `DB_CONNECTION` | Loại DB | `mysql` |
+| `DB_CONNECTION` | **Bắt buộc:** Loại DB (nếu thiếu, Laravel dùng sqlite → lỗi "readonly database" trên Render) | `mysql` |
 | `DB_HOST` | Host MySQL từ Railway | giá trị từ Railway |
 | `DB_PORT` | Port MySQL | `3306` |
 | `DB_DATABASE` | Tên database | từ Railway |

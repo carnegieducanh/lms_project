@@ -16,6 +16,9 @@ if ($mysqlUrl && str_starts_with($mysqlUrl, 'mysql://')) {
     ];
 }
 
+// Nếu có MYSQL_PUBLIC_URL (Railway) thì mặc định dùng mysql, tránh dùng sqlite (readonly trên Render)
+$defaultConnection = env('DB_CONNECTION', $mysqlUrl ? 'mysql' : 'sqlite');
+
 return [
 
     /*
@@ -30,7 +33,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'sqlite'),
+    'default' => $defaultConnection,
 
     /*
     |--------------------------------------------------------------------------
