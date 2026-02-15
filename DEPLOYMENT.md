@@ -162,15 +162,13 @@ Trong **Environment** của Web Service, thêm (key = name, value = giá trị):
 - Sau khi lưu, Render sẽ tự **Build** rồi **Deploy**. Lần đầu có thể mất vài phút.
 - Khi xong, bạn có URL dạng: `https://lms-backend.onrender.com`. Dùng URL này làm `APP_URL` và làm base URL cho API (frontend sẽ gọi tới đây).
 
-### 4.4 Chạy migration (lần đầu)
+### 4.4 Migration (chạy tự động khi deploy)
 
-Trên Render, bạn có thể chạy migration bằng **Shell** (nếu Render hỗ trợ) hoặc **Background Worker** một lần:
+Migration được chạy **tự động** mỗi khi container khởi động: script sẽ thử **tối đa 6 lần**, mỗi lần cách 5 giây (để đợi DB sẵn sàng). Không cần làm gì thêm.
 
-- Cách đơn giản: trong **Render Dashboard** → service → **Shell** (nếu có), chạy:
-  - `php artisan migrate --force`
-- Hoặc thêm vào **Build Command** (tạm) để chạy mỗi lần deploy:
-  - Trong **Build Command** (nếu không dùng Docker): có thể thêm bước cuối: `php artisan migrate --force` (chỉ nên dùng cẩn thận để tránh chạy trùng).
-- Cách tốt hơn: dùng **Render Shell** hoặc **one-off job** (nếu có) để chạy `php artisan migrate --force` một lần sau khi DB đã sẵn sàng.
+**Lưu ý:** Gói **Render Free không có Shell** (phải nâng cấp mới dùng được). Nếu migration vẫn báo lỗi sau 6 lần thử, kiểm tra lại **MYSQL_PUBLIC_URL** trên Environment rồi **Redeploy** — lần deploy sau migration sẽ chạy lại tự động.
+
+*(Cảnh báo Apache "Could not reliably determine the server's fully qualified domain name" là vô hại; đã tắt trong Dockerfile.)*
 
 ---
 
