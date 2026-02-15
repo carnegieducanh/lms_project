@@ -1,0 +1,10 @@
+# Render Blueprint - Backend Laravel API
+# Repo root phải có thư mục backend/ và frontend/; Render dùng Dockerfile tại root (không dùng rootDir)
+# https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: lms-backend
+    runtime: docker
+    # Không dùng rootDir để tránh lỗi "Root directory backend does not exist"
+    # Dockerfile tại repo root sẽ COPY backend/ vào image
+    plan: free
