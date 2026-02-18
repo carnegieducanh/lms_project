@@ -152,14 +152,11 @@ class CourseController extends Controller
 
         // Upload lên Cloudinary nếu đã cấu hình (production)
         if (env('CLOUDINARY_CLOUD_NAME')) {
-            if ($course->image != "" && (str_starts_with($course->image, 'http://') || str_starts_with($course->image, 'https://'))) {
-                // Có thể xóa bản cũ trên Cloudinary theo public_id nếu cần
-            }
-            $upload = Cloudinary::upload($image->getRealPath(), [
+            $upload = Cloudinary::uploadApi()->upload($image->getRealPath(), [
                 'folder' => 'lms/courses',
                 'public_id' => 'course-'.$id.'-'.strtotime('now'),
             ]);
-            $course->image = $upload->getSecurePath();
+            $course->image = $upload['secure_url'];
             $course->save();
             return response()->json([
                 'status' => 200,

@@ -151,11 +151,12 @@ class LessonController extends Controller
 
         // Upload lên Cloudinary nếu đã cấu hình (production)
         if (env('CLOUDINARY_CLOUD_NAME')) {
-            $upload = Cloudinary::uploadVideo($video->getRealPath(), [
+            $upload = Cloudinary::uploadApi()->upload($video->getRealPath(), [
                 'folder' => 'lms/videos',
                 'public_id' => 'lesson-'.$id.'-'.strtotime('now'),
+                'resource_type' => 'video',
             ]);
-            $lesson->video = $upload->getSecurePath();
+            $lesson->video = $upload['secure_url'];
             $lesson->save();
             return response()->json([
                 'status' => 200,
