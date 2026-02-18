@@ -19,14 +19,13 @@ use Intervention\Image\Drivers\Gd\Driver;
 class CourseController extends Controller
 {
     // This method will return all course for a specific user
-    public function index() {
-
-    }
+    public function index() {}
 
     // This method will store/save a course in database as a draft.
-    public function store(Request $request) {        
+    public function store(Request $request)
+    {
 
-        $validator = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(), [
             'title' => 'required|min:5'
         ]);
 
@@ -34,7 +33,7 @@ class CourseController extends Controller
             return response()->json([
                 'status' => 400,
                 'errors' => $validator->errors()
-            ],400);
+            ], 400);
         }
 
         // This will store course in db
@@ -48,27 +47,29 @@ class CourseController extends Controller
             'status' => 200,
             'data' => $course,
             'message' => 'Course has been created successfully.'
-        ],200);
+        ], 200);
     }
 
-    public function show($id) {
-        $course = Course::with(['chapters','chapters.lessons'])->find($id);
+    public function show($id)
+    {
+        $course = Course::with(['chapters', 'chapters.lessons'])->find($id);
 
         if ($course == null) {
             return response()->json([
                 'status' => 404,
                 'message' => 'Course not found',
-            ],404);
+            ], 404);
         }
 
         return response()->json([
             'status' => 200,
             'data' => $course,
-        ],200);
+        ], 200);
     }
 
     // This method will return categories/levels/languages
-    public function metaData() {
+    public function metaData()
+    {
         $categories = Category::all();
         $levels = Level::all();
         $languages = Language::all();
@@ -78,11 +79,12 @@ class CourseController extends Controller
             'categories' => $categories,
             'levels' => $levels,
             'languages' => $languages,
-        ],200);
+        ], 200);
     }
 
     // This method will update course basic data
-    public function update($id, Request $request) {        
+    public function update($id, Request $request)
+    {
 
         $course = Course::find($id);
 
@@ -90,10 +92,10 @@ class CourseController extends Controller
             return response()->json([
                 'status' => 404,
                 'message' => 'Course not found',
-            ],404);
+            ], 404);
         }
 
-        $validator = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(), [
             'title' => 'required|min:5',
             'category' => 'required',
             'level' => 'required',
@@ -105,7 +107,7 @@ class CourseController extends Controller
             return response()->json([
                 'status' => 400,
                 'errors' => $validator->errors()
-            ],400);
+            ], 400);
         }
 
         // This will update course in db
@@ -122,11 +124,12 @@ class CourseController extends Controller
             'status' => 200,
             'data' => $course,
             'message' => 'Course updated successfully.'
-        ],200);
+        ], 200);
     }
 
     // this method will upload course image
-    public function saveCourseImage($id, Request $request) {
+    public function saveCourseImage($id, Request $request)
+    {
 
         $course = Course::find($id);
 
@@ -134,10 +137,10 @@ class CourseController extends Controller
             return response()->json([
                 'status' => 404,
                 'message' => 'Course not found.'
-            ],404);
+            ], 404);
         }
 
-        $validator = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(), [
             'image' => 'required|mimes:png,jpg,jpeg'
         ]);
 
@@ -145,7 +148,7 @@ class CourseController extends Controller
             return response()->json([
                 'status' => 400,
                 'errors' => $validator->errors()
-            ],400);
+            ], 400);
         }
 
         $image = $request->image;
@@ -154,7 +157,7 @@ class CourseController extends Controller
         if (env('CLOUDINARY_CLOUD_NAME')) {
             $upload = Cloudinary::uploadApi()->upload($image->getRealPath(), [
                 'folder' => 'lms/courses',
-                'public_id' => 'course-'.$id.'-'.strtotime('now'),
+                'public_id' => 'course-' . $id . '-' . strtotime('now'),
             ]);
             $course->image = $upload['secure_url'];
             $course->save();
@@ -162,28 +165,28 @@ class CourseController extends Controller
                 'status' => 200,
                 'data' => $course,
                 'message' => 'Image uploaded successfully.'
-            ],200);
+            ], 200);
         }
 
         // Local: xóa ảnh cũ nếu có
         if ($course->image != "") {
-            if (File::exists(public_path('uploads/course/'.$course->image))) {
-                File::delete(public_path('uploads/course/'.$course->image));
+            if (File::exists(public_path('uploads/course/' . $course->image))) {
+                File::delete(public_path('uploads/course/' . $course->image));
             }
-            if (File::exists(public_path('uploads/course/small/'.$course->image))) {
-                File::delete(public_path('uploads/course/small/'.$course->image));
+            if (File::exists(public_path('uploads/course/small/' . $course->image))) {
+                File::delete(public_path('uploads/course/small/' . $course->image));
             }
         }
 
         $ext = $image->getClientOriginalExtension();
-        $imageName = strtotime('now').'-'.$id.'.'.$ext;
-        $image->move(public_path('uploads/course'),$imageName);
+        $imageName = strtotime('now') . '-' . $id . '.' . $ext;
+        $image->move(public_path('uploads/course'), $imageName);
 
         // Create Small Thumbnail
         $manager = new ImageManager(Driver::class);
-        $img = $manager->read(public_path('uploads/course/'.$imageName));
+        $img = $manager->read(public_path('uploads/course/' . $imageName));
         $img->cover(750, 450);
-        $img->save(public_path('uploads/course/small/'.$imageName));
+        $img->save(public_path('uploads/course/small/' . $imageName));
 
         $course->image = $imageName;
         $course->save();
@@ -192,45 +195,45 @@ class CourseController extends Controller
             'status' => 200,
             'data' => $course,
             'message' => 'Image uploaded successfully.'
-        ],200);
-
+        ], 200);
     }
 
     // This method will publish/unpublish course
-    public function changeStatus($id, Request $request) {
+    public function changeStatus($id, Request $request)
+    {
         $course = Course::find($id);
 
         if ($course == null) {
             return response()->json([
                 'status' => 404,
                 'message' => 'Course not found.'
-            ],404);
+            ], 404);
         }
 
         // At least one chapter is required
-        $chapters = Chapter::where('course_id',$id)->pluck('id')->toArray();
+        $chapters = Chapter::where('course_id', $id)->pluck('id')->toArray();
         if (count($chapters) == 0) {
             return response()->json([
                 'status' => 200,
                 'course' => $course,
                 'message' => "A chapter is required before you can publish the course."
-            ],200);
+            ], 200);
         }
 
         // At least one lesson with video is required
-        $lessonCount = Lesson::whereIn('chapter_id',$chapters)
-                        ->where('status',1)
-                        ->whereNotNull('video')
-                        ->count();
+        $lessonCount = Lesson::whereIn('chapter_id', $chapters)
+            ->where('status', 1)
+            ->whereNotNull('video')
+            ->count();
 
         if ($lessonCount == 0) {
             return response()->json([
                 'status' => 200,
                 'course' => $course,
                 'message' => "At least on lesson with video is required to publish this course."
-            ],200);
+            ], 200);
         }
-        
+
         $course->status = $request->status;
         $course->save();
 
@@ -240,20 +243,21 @@ class CourseController extends Controller
             'status' => 200,
             'course' => $course,
             'message' => $message
-        ],200);
+        ], 200);
     }
 
     // This method will delete course
-    public function destroy($id, Request $request) {
-        $course = Course::where('id',$id)
-                    ->where('user_id',$request->user()->id)
-                    ->first();
+    public function destroy($id, Request $request)
+    {
+        $course = Course::where('id', $id)
+            ->where('user_id', $request->user()->id)
+            ->first();
 
         if ($course == null) {
             return response()->json([
                 'status' => 404,
                 'message' => 'Course not found.'
-            ],404);
+            ], 404);
         }
 
         $chapters = Chapter::where('course_id', $course->id)->get();
@@ -264,23 +268,23 @@ class CourseController extends Controller
                 if (!empty($lessons)) {
                     foreach ($lessons as $lesson) {
                         if ($lesson->video != "") {
-                            if (File::exists(public_path('uploads/course/videos/'.$lesson->video))) {
-                                File::delete(public_path('uploads/course/videos/'.$lesson->video));
-                            }                                                       
+                            if (File::exists(public_path('uploads/course/videos/' . $lesson->video))) {
+                                File::delete(public_path('uploads/course/videos/' . $lesson->video));
+                            }
                         }
                     }
-                }                
+                }
             }
         }
-        
+
         if ($course->image != "") {
-            if (File::exists(public_path('uploads/course/small/'.$course->image))) {
-                File::delete(public_path('uploads/course/small/'.$course->image));
-            }  
-            
-            if (File::exists(public_path('uploads/course/'.$course->image))) {
-                File::delete(public_path('uploads/course/'.$course->image));
-            }   
+            if (File::exists(public_path('uploads/course/small/' . $course->image))) {
+                File::delete(public_path('uploads/course/small/' . $course->image));
+            }
+
+            if (File::exists(public_path('uploads/course/' . $course->image))) {
+                File::delete(public_path('uploads/course/' . $course->image));
+            }
         }
 
         $course->delete();
@@ -288,7 +292,6 @@ class CourseController extends Controller
         return response()->json([
             'status' => 200,
             'message' => 'Course deleted successfully.'
-        ],200);
-
+        ], 200);
     }
 }
