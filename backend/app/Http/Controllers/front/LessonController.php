@@ -150,7 +150,7 @@ class LessonController extends Controller
         $video = $request->video;
 
         // Upload lên Cloudinary nếu đã cấu hình (production)
-        if (env('CLOUDINARY_CLOUD_NAME')) {
+        if (config('cloudinary.cloud_url')) {
             $upload = Cloudinary::uploadApi()->upload($video->getRealPath(), [
                 'folder' => 'lms/videos',
                 'public_id' => 'lesson-'.$id.'-'.strtotime('now'),
