@@ -22,7 +22,7 @@ return new class extends Migration
             $table->double('price', 10, 2)->nullable();
             $table->double('cross_price', 10, 2)->nullable();
             $table->integer('status')->default(0);
-            $table->enum('is_featured', ['yes', 'no'])->nullable()->default('yes');
+            $table->enum('is_featured', ['yes', 'no'])->nullable()->default('no');
             $table->string('image')->nullable();
             $table->timestamps();
         });

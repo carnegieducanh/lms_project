@@ -40,6 +40,7 @@ class CourseController extends Controller
         $course = new Course();
         $course->title = $request->title;
         $course->status = 0;
+        $course->is_featured = 'yes';
         $course->user_id = $request->user()->id;
         $course->save();
 
