@@ -12,18 +12,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('courses', function (Blueprint $table) {
-            $table->id();            
-            $table->string('title');            
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');            
-            $table->foreignId('category_id')->nullable()->constrained()->onDelete('cascade');            
-            $table->foreignId('level_id')->nullable()->constrained()->onDelete('cascade');            
-            $table->foreignId('language_id')->nullable()->constrained()->onDelete('cascade');                
-            $table->text('description')->nullable();  
-            $table->double('price',10,2)->nullable(); 
-            $table->double('cross_price',10,2)->nullable(); 
-            $table->integer('status')->default(0); 
-            $table->enum('is_featured',['yes','no'])->nullable()->default('no'); 
-            $table->string('image')->nullable();           
+            $table->id();
+            $table->string('title');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('category_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreignId('level_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreignId('language_id')->nullable()->constrained()->onDelete('cascade');
+            $table->text('description')->nullable();
+            $table->double('price', 10, 2)->nullable();
+            $table->double('cross_price', 10, 2)->nullable();
+            $table->integer('status')->default(0);
+            $table->enum('is_featured', ['yes', 'no'])->nullable()->default('yes');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
