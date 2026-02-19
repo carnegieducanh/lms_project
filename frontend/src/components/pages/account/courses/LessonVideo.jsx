@@ -30,7 +30,7 @@ const LessonVideo = ({lesson}) => {
                 </div>
 
                 <FilePond
-                    acceptedFileTypes={['video/mp4']}
+                    acceptedFileTypes={['video/mp4', 'video/quicktime', 'video/x-m4v', 'video/mpeg']}
                     credits={false} 
                     files={files}
                     onupdatefiles={setFiles}
