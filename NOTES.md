@@ -241,7 +241,7 @@ Trong reducer:
 
 const chapterReducer = (state, action) => {
 
-👉 state chính là giá trị hiện tại của chapters
+👉 `state `chính là giá trị hiện tại của chapters
 
 Ví dụ:
 

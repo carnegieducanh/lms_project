@@ -142,7 +142,7 @@ class LessonController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'video' => 'required|mimetypes:video/mp4,video/quicktime,video/x-m4v,video/mpeg'
+            'video' => 'required|mimetypes:video/mp4'
         ]);
 
         if ($validator->fails()) {
@@ -155,7 +155,7 @@ class LessonController extends Controller
         $video = $request->video;
 
         // Upload lên Cloudinary nếu đã cấu hình (production)
-        if (config('cloudinary.cloud_url')) {
+        if (env('CLOUDINARY_CLOUD_NAME')) {
             $upload = Cloudinary::uploadApi()->upload($video->getRealPath(), [
                 'folder' => 'lms/videos',
                 'public_id' => 'lesson-' . $id . '-' . strtotime('now'),

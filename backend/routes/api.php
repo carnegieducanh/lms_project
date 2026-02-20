@@ -10,6 +10,11 @@ use App\Http\Controllers\front\RequirementController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+//cấu hình UptimeRobot để tránh Render.com Cold Start
+Route::get('/health', function () {
+    return response()->json(['status' => 'ok'], 200);
+});
+
 
 Route::post('/register', [AccountController::class, 'register']);
 Route::post('/login', [AccountController::class, 'authenticate']);

@@ -180,3 +180,63 @@ khi chọn `form-select` thì sẽ có biểu tượng icon mũi tên trỏ xu�
         <option value="0">Block</option>
         </select>
   </div>
+
+_Tránh truy cập đường dẫn khi chưa login, ng dùng sẽ được trả về tẩng login_
+Tạo file context/Auth.jsx và RequireAuth.jsx ở phía frontend
+Sau đó phải thêm vào file main.jsx
+<StrictMode>
+<AuthProvider>
+<App />
+</AuthProvider>
+</StrictMode>,
+
+**Sử dụng `reset` trong form**
+Mục đích của reset(...): cập nhật toàn bộ giá trị form của react-hook-form sau khi dữ liệu course được load từ API — nó gán các giá trị (title, category, sell_price, v.v.) vào các input đã đăng ký.
+
+const {
+register,
+handleSubmit,
+formState: { errors },
+reset,
+} = useForm({
+defaultValues: async () => {
+await fetch(`${apiUrl}/courses/${params.id}`, {
+method: "GET",
+headers: {
+"Content-type": "application/json",
+Accept: "application/json",
+Authorization: `Bearer ${token}`,
+},
+})
+.then((res) => res.json())
+.then((result) => {
+if (result.status == 200) {
+reset({
+title: result.data.title,
+category: result.data.category_id,
+level: result.data.level_id,
+language: result.data.language_id,
+description: result.data.description,
+sell_price: result.data.price,
+cross_price: result.data.cross_price,
+});
+
+            setCourse(result.data);
+          } else {
+            console.log("Something went wrong");
+          }
+        });
+    },
+
+});
+
+Tại sao vẫn cần setCourse(result.data): reset chỉ cập nhật giá trị form; setCourse lưu toàn bộ object course vào state để dùng ở các phần khác của UI (ví dụ ManageChapter, EditCover, hiển thị status, v.v.).
+
+So sánh nhanh với setValue: setValue cập nhật từng trường một; reset thay thế toàn bộ giá trị form (và thường đặt lại trạng thái dirty/touched/errors nếu không truyền options).
+
+## $outcomes = Outcome::where('course_id',$request->course_id)
+
+**where('course_id', $request->course_id)** : lọc những record có cột course_id bằng với giá trị course_id được gửi từ request (ví dụ từ form hay query string).
+
+.get() → trả về collection của tất cả record
+.first() → trả về 1 record duy nhất (cái đầu tiên)
