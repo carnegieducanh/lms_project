@@ -101,7 +101,6 @@ class CourseController extends Controller
             'category' => 'required',
             'level' => 'required',
             'language' => 'required',
-            'sell_price' => 'required',
         ]);
 
         if ($validator->fails()) {

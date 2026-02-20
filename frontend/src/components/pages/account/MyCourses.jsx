@@ -3,41 +3,45 @@ import { Link } from 'react-router-dom'
 import UserSidebar from '../../common/UserSidebar'
 import EditCourse from '../../common/EditCourse'
 import Layout from '../../common/Layout'
+import Loading from '../../common/Loading'
 import { apiUrl, token } from '../../common/Config'
 
 const MyCourses = () => {
 
     const [courses, setCourses] = useState([])
+    const [loading, setLoading] = useState(true)
 
-    const fetchCourses =  async () => {
+    const fetchCourses = async () => {
+        setLoading(true)
         await fetch(`${apiUrl}/my-courses`,{
-            method: 'GET', 
+            method: 'GET',
             headers: {
                 'Content-type' : 'application/json',
-                'Accept' : 'application/json',  
-                'Authorization' : `Bearer ${token}`              
+                'Accept' : 'application/json',
+                'Authorization' : `Bearer ${token}`
             }
         })
         .then(res => res.json())
         .then(result => {
             if (result.status == 200) {
-                console.log(result)
                 setCourses(result.courses)
             } else {
                 console.log("Something went wrong")
             }
-        });
-
+        })
+        .finally(() => {
+            setLoading(false)
+        })
     }
 
     const deleteCourse = async (id) => {
         if (confirm("Are you sure you want to delete?")) {
             await fetch(`${apiUrl}/courses/${id}`,{
-                method: 'DELETE', 
+                method: 'DELETE',
                 headers: {
                     'Content-type' : 'application/json',
-                    'Accept' : 'application/json',  
-                    'Authorization' : `Bearer ${token}`              
+                    'Accept' : 'application/json',
+                    'Authorization' : `Bearer ${token}`
                 }
             })
             .then(res => res.json())
@@ -71,19 +75,28 @@ const MyCourses = () => {
                       <UserSidebar/>
                   </div>
                   <div className='col-lg-9'>
-                        <div className='row gy-4'>
-                        {
-                            courses && courses.map(course => {
-                                return (
-                                    <EditCourse 
-                                        course={course}
-                                        deleteCourse={deleteCourse}
-                                    
-                                    />   
-                                )
-                            })
-                        }
-                        </div>
+                      {loading ? (
+                          <div className="py-5">
+                              <Loading />
+                          </div>
+                      ) : (
+                          <div className='row gy-4'>
+                              {courses && courses.map(course => {
+                                  return (
+                                      <EditCourse
+                                          course={course}
+                                          deleteCourse={deleteCourse}
+                                          key={course.id}
+                                      />
+                                  )
+                              })}
+                              {courses.length === 0 && (
+                                  <div className="col-12 text-center text-muted py-5">
+                                      <p>Bạn chưa tạo khóa học nào.</p>
+                                  </div>
+                              )}
+                          </div>
+                      )}
                   </div>
               </div>
           </div>

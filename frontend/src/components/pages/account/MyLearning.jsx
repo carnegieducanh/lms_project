@@ -2,12 +2,15 @@ import React, { useEffect, useState } from "react"
 import UserSidebar from "../../common/UserSidebar"
 import CourseEnrolled from "../../common/CourseEnrolled"
 import Layout from "../../common/Layout"
+import Loading from "../../common/Loading"
 import { apiUrl, token } from "../../common/Config"
 
 const MyLearning = () => {
     const [enrollments, setEnrollments] = useState([])
+    const [loading, setLoading] = useState(true)
 
     const fetchEnrollments = async () => {
+        setLoading(true)
         await fetch(`${apiUrl}/enrollments`, {
             method: "GET",
             headers: {
@@ -24,6 +27,9 @@ const MyLearning = () => {
                 console.log("Something went wrong")
             }
         })
+        .finally(() => {
+            setLoading(false)
+        })
     }
 
     useEffect(() => {
@@ -37,25 +43,31 @@ const MyLearning = () => {
                     <div className="row">
                         <div className="d-flex justify-content-between  mt-5 mb-3">
                             <h2 className="h4 mb-0 pb-0">My Learning</h2>
-                            {/* <a href="#" className='btn btn-primary'>Create</a> */}
                         </div>
                         <div className="col-lg-3 account-sidebar">
                             <UserSidebar />
                         </div>
                         <div className="col-lg-9">
-                            <div className="row gy-4">
-                                {
-                                    enrollments && enrollments.map(enrollment => {
+                            {loading ? (
+                                <div className="py-5">
+                                    <Loading />
+                                </div>
+                            ) : (
+                                <div className="row gy-4">
+                                    {enrollments && enrollments.map(enrollment => {
                                         return (
-                                            <CourseEnrolled 
+                                            <CourseEnrolled
                                                 enrollment={enrollment}
                                                 key={enrollment.id} />
                                         )
-                                    })
-                                }
-                                
-                                
-                            </div>
+                                    })}
+                                    {enrollments.length === 0 && (
+                                        <div className="col-12 text-center text-muted py-5">
+                                            <p>Bạn chưa tham gia khóa học nào.</p>
+                                        </div>
+                                    )}
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>

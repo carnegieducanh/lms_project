@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer, useState } from "react";
 import { useForm } from "react-hook-form";
-import { apiUrl, token } from "../../../common/Config";
+import { apiUrl, token, convertMinutesToHours } from "../../../common/Config";
 import toast from "react-hot-toast";
 import Accordion from "react-bootstrap/Accordion";
 import UpdateChapter from "./UpdateChapter";
@@ -227,7 +227,7 @@ const ManageChapter = ({ course, params }) => {
                                   <div className="col-md-5 text-end">
                                     {lesson.duration > 0 && (
                                       <small className="fw-bold text-muted me-2">
-                                        20 Mins
+                                        {convertMinutesToHours(lesson.duration)}
                                       </small>
                                     )}
 

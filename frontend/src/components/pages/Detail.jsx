@@ -299,12 +299,12 @@ const Detail = () => {
               <div className="border rounded-3 bg-white p-4 shadow-sm">
                 <Card.Img src={course.course_small_image} />
                 <Card.Body className="mt-3">
-                  <h3 className="fw-bold">${course.price}</h3>
-                  {course.cross_price && (
-                    <div className="text-muted text-decoration-line-through">
-                      ${course.cross_price}
-                    </div>
-                  )}
+                  <div className="d-flex align-items-center mb-2">
+                    <i className="bi bi-clock fs-4 text-primary me-2"></i>
+                    <h3 className="fw-bold mb-0">
+                      {convertMinutesToHours(course.total_duration)}
+                    </h3>
+                  </div>
 
                   {/* Buttons */}
                   <div className="mt-4">

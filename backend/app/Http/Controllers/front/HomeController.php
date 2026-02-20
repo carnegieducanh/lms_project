@@ -51,6 +51,9 @@ class HomeController extends Controller
     {
         $courses = Course::orderBy('title', 'ASC')
             ->with('level')
+            ->with(['chapters' => function ($q) {
+                $q->withSum('lessons', 'duration');
+            }])
             ->withCount('enrollments')
             ->withCount('reviews')
             ->withSum('reviews', 'rating')
@@ -61,6 +64,7 @@ class HomeController extends Controller
         $courses->map(function ($course) {
             $course->rating = $course->reviews_count > 0 ?
                 number_format($course->reviews_sum_rating / $course->reviews_count, 1) : "0.0";
+            $course->total_duration = $course->chapters->sum('lessons_sum_duration');
         });
 
         return response()->json([
@@ -76,7 +80,10 @@ class HomeController extends Controller
             ->withCount('enrollments')
             ->withCount('reviews')
             ->withSum('reviews', 'rating')
-            ->with('level');
+            ->with('level')
+            ->with(['chapters' => function ($q) {
+                $q->withSum('lessons', 'duration');
+            }]);
 
         // Filter Course by keyword
         if (!empty($request->keyword)) {
@@ -121,6 +128,7 @@ class HomeController extends Controller
         $courses->map(function ($course) {
             $course->rating = $course->reviews_count > 0 ?
                 number_format($course->reviews_sum_rating / $course->reviews_count, 1) : "0.0";
+            $course->total_duration = $course->chapters->sum('lessons_sum_duration');
         });
 
         return response()->json([

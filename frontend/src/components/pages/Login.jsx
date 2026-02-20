@@ -34,6 +34,7 @@ const Login = () => {
           };
           localStorage.setItem("userInfoLms", JSON.stringify(userInfo));
           login(userInfo);
+          toast.success("Đăng nhập thành công!");
           navigate("/account/dashboard");
         } else {
           toast.error(result.message);

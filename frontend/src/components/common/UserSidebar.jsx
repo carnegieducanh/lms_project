@@ -2,12 +2,22 @@ import React, { useContext } from "react";
 import { FaChartBar, FaDesktop, FaUserLock } from "react-icons/fa";
 import { BsMortarboardFill } from "react-icons/bs";
 import { MdLogout } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/Auth";
 import { FaUser } from "react-icons/fa";
+import toast from "react-hot-toast";
 
 const UserSidebar = () => {
   const { logout } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    logout();
+    toast.success("Đã đăng xuất thành công!");
+    navigate("/account/login");
+  };
+
   return (
     <div className="card border-0 shadow-lg">
       <div className="card-body  p-4">
@@ -40,7 +50,7 @@ const UserSidebar = () => {
             </Link>
           </li>
           <li>
-            <Link onClick={logout} to="/account/login" className="text-danger">
+            <Link onClick={handleLogout} to="#" className="text-danger">
               <MdLogout size={16} className="me-2" /> Logout
             </Link>
           </li>

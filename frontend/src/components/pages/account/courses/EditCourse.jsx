@@ -39,8 +39,6 @@ const EditCourse = () => {
               level: result.data.level_id,
               language: result.data.language_id,
               description: result.data.description,
-              sell_price: result.data.price,
-              cross_price: result.data.cross_price,
             });
 
             setCourse(result.data);
@@ -298,40 +296,6 @@ const EditCourse = () => {
                             placeholder="Description"
                             className="form-control"
                           ></textarea>
-                        </div>
-
-                        <h4 className="h5 border-bottom pb-3 mb-3">Pricing</h4>
-                        <div className="mb-3">
-                          <label className="form-label" htmlFor="sell-price">
-                            Sell Price
-                          </label>
-                          <input
-                            type="text"
-                            {...register("sell_price", {
-                              required: "The sell price field is required.",
-                            })}
-                            className={`form-control ${errors.sell_price && "is-invalid"}`}
-                            placeholder="Sell Price"
-                            id="sell-price"
-                          />
-                          {errors.sell_price && (
-                            <p className="invalid-feedback">
-                              {errors.sell_price.message}
-                            </p>
-                          )}
-                        </div>
-
-                        <div className="mb-3">
-                          <label className="form-label" htmlFor="cross-price">
-                            Cross Price
-                          </label>
-                          <input
-                            type="text"
-                            {...register("cross_price")}
-                            className={`form-control`}
-                            placeholder="Cross Price"
-                            id="cross-price"
-                          />
                         </div>
 
                         <button disabled={loading} className="btn btn-primary">

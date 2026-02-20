@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { convertMinutesToHours } from './Config'
 
 const Course = ({course,customClasses}) => {
   return (
@@ -54,10 +55,12 @@ const Course = ({course,customClasses}) => {
             </div>
             <div className="card-footer bg-white">
                 <div className="d-flex py-2 justify-content-between align-items-center">
-                    {
-                        course.price && <div className="price">${course.price}</div>
-                    }
-                    
+                    {course.total_duration > 0 && (
+                        <div className="duration text-muted">
+                            <i className="bi bi-clock me-1"></i>
+                            {convertMinutesToHours(course.total_duration)}
+                        </div>
+                    )}
 
                     <div className="add-to-cart">
                         <Link to={`/detail/${course.id}`} className="btn btn-primary">Read More</Link>
