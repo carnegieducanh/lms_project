@@ -55,7 +55,7 @@ const Course = ({course,customClasses}) => {
                     </div>
                 </div>
             </div>
-            <div className="card-footer bg-white">
+            <div className="card-footer">
                 <div className="d-flex py-2 justify-content-between align-items-center">
                     {course.total_duration > 0 && (
                         <div className="duration text-muted">

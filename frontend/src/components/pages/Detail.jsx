@@ -144,13 +144,13 @@ const Detail = () => {
               </div>
               <div className="row">
                 <div className="col-md-12 mt-4">
-                  <div className="border bg-white rounded-3 p-4">
+                  <div className="border bg-card rounded-3 p-4">
                     <h3 className="mb-3  h4">Overview</h3>
                     {course.description}
                   </div>
                 </div>
                 <div className="col-md-12 mt-4">
-                  <div className="border bg-white rounded-3 p-4">
+                  <div className="border bg-card rounded-3 p-4">
                     <h3 className="mb-3 h4">What you will learn</h3>
                     <ul className="list-unstyled mt-3">
                       {course.outcomes &&
@@ -169,7 +169,7 @@ const Detail = () => {
                 </div>
 
                 <div className="col-md-12 mt-4">
-                  <div className="border bg-white rounded-3 p-4">
+                  <div className="border bg-card rounded-3 p-4">
                     <h3 className="mb-3 h4">Requirements</h3>
                     <ul className="list-unstyled mt-3">
                       {course.requirements &&
@@ -188,7 +188,7 @@ const Detail = () => {
                 </div>
 
                 <div className="col-md-12 mt-4">
-                  <div className="border bg-white rounded-3 p-4">
+                  <div className="border bg-card rounded-3 p-4">
                     <h3 className="h4 mb-3">Course Structure</h3>
                     <p>
                       {course.chapters_count} Chapters . {course.total_lessons}{" "}
@@ -259,7 +259,7 @@ const Detail = () => {
                 </div>
 
                 <div className="col-md-12 mt-4">
-                  <div className="border bg-white rounded-3 p-4">
+                  <div className="border bg-card rounded-3 p-4">
                     <h3 className="mb-3 h4">Reviews</h3>
                     <p>Our student says about this course</p>
 
@@ -296,7 +296,7 @@ const Detail = () => {
               </div>
             </div>
             <div className="col-lg-4">
-              <div className="border rounded-3 bg-white p-4 shadow-sm">
+              <div className="border rounded-3 bg-card p-4 shadow-sm">
                 <Card.Img src={course.course_small_image} />
                 <Card.Body className="mt-3">
                   <div className="d-flex align-items-center mb-2">
