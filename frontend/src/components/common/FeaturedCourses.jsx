@@ -2,12 +2,15 @@ import React, { useEffect, useState } from "react";
 import Course from "./Course";
 import { apiUrl, token } from "./Config";
 import { useTranslation } from "react-i18next";
+import Loading from "./Loading";
 
 const FeaturedCourses = () => {
   const [courses, setCourses] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { t: trans } = useTranslation();
 
   const fetchFeaturedCourses = () => {
+    setLoading(true);
     fetch(`${apiUrl}/fetch-featured-courses`, {
       method: "GET",
       headers: {
@@ -23,6 +26,9 @@ const FeaturedCourses = () => {
         } else {
           console.log("Something went wrong");
         }
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
@@ -37,18 +43,22 @@ const FeaturedCourses = () => {
           <h2 className="h3">{trans("featuredCourses.title")}</h2>
           <p>{trans("featuredCourses.description")}</p>
         </div>
-        <div className="row gy-4">
-          {courses &&
-            courses.map((course) => {
-              return (
-                <Course
-                  key={course.id}
-                  course={course}
-                  customClasses="col-lg-3 col-md-6"
-                />
-              );
-            })}
-        </div>
+        {loading ? (
+          <Loading />
+        ) : (
+          <div className="row gy-4">
+            {courses &&
+              courses.map((course) => {
+                return (
+                  <Course
+                    key={course.id}
+                    course={course}
+                    customClasses="col-lg-3 col-md-6"
+                  />
+                );
+              })}
+          </div>
+        )}
       </div>
     </section>
   );

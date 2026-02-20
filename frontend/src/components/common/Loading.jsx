@@ -4,10 +4,9 @@ import Spinner from 'react-bootstrap/Spinner';
 
 const Loading = () => {
   return (
-    <div className='w-full d-flex justify-content-center'>
-        <Spinner animation="border" role="status">
-            <span className="visually-hidden">Loading...</span>
-        </Spinner>
+    <div className='w-100 d-flex justify-content-center align-items-center gap-2 py-3'>
+        <Spinner animation="border" role="status" size="sm" />
+        <span>Loading...</span>
     </div>
   )
 }

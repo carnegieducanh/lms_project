@@ -2,12 +2,15 @@ import React, { useEffect, useState } from "react";
 import { apiUrl, token } from "./Config";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import Loading from "./Loading";
 
 const FeaturedCategories = () => {
   const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { t: trans } = useTranslation();
 
   const fetchCategories = () => {
+    setLoading(true);
     fetch(`${apiUrl}/fetch-categories`, {
       method: "GET",
       headers: {
@@ -23,6 +26,9 @@ const FeaturedCategories = () => {
         } else {
           console.log("Something went wrong");
         }
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
@@ -36,22 +42,26 @@ const FeaturedCategories = () => {
           <h2 className="h3">{trans("featuredCategories.title")}</h2>
           <p>{trans("featuredCategories.description")}</p>
         </div>
-        <div className="row gy-3">
-          {categories &&
-            categories.map((category) => {
-              return (
-                <div key={category.id} className="col-6 col-md-6 col-lg-3">
-                  <div className="card shadow border-0">
-                    <div className="card-body">
-                      <Link to={`/courses?category=${category.id}`}>
-                        {category.name}
-                      </Link>
+        {loading ? (
+          <Loading />
+        ) : (
+          <div className="row gy-3">
+            {categories &&
+              categories.map((category) => {
+                return (
+                  <div key={category.id} className="col-6 col-md-6 col-lg-3">
+                    <div className="card shadow border-0">
+                      <div className="card-body">
+                        <Link to={`/courses?category=${category.id}`}>
+                          {category.name}
+                        </Link>
+                      </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
-        </div>
+                );
+              })}
+          </div>
+        )}
       </div>
     </section>
   );
