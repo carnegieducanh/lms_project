@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { apiUrl, token } from "./Config";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const FeaturedCategories = () => {
   const [categories, setCategories] = useState([]);
+  const { t: trans } = useTranslation();
 
   const fetchCategories = () => {
     fetch(`${apiUrl}/fetch-categories`, {
@@ -31,11 +33,8 @@ const FeaturedCategories = () => {
     <section className="section-2">
       <div className="container">
         <div className="section-title py-3  mt-4">
-          <h2 className="h3">Explore Categories</h2>
-          <p>
-            Discover categories designed to help you excel in your professional
-            and personal growth.
-          </p>
+          <h2 className="h3">{trans("featuredCategories.title")}</h2>
+          <p>{trans("featuredCategories.description")}</p>
         </div>
         <div className="row gy-3">
           {categories &&

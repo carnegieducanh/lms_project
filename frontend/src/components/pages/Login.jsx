@@ -5,10 +5,12 @@ import { useForm } from "react-hook-form";
 import { apiUrl } from "../common/Config";
 import toast from "react-hot-toast";
 import { AuthContext } from "../context/Auth";
+import { useTranslation } from "react-i18next";
 
 const Login = () => {
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
+  const { t: trans } = useTranslation();
   const {
     handleSubmit,
     register,
@@ -34,7 +36,7 @@ const Login = () => {
           };
           localStorage.setItem("userInfoLms", JSON.stringify(userInfo));
           login(userInfo);
-          toast.success("Đăng nhập thành công!");
+          toast.success(trans("login.success"));
           navigate("/account/dashboard");
         } else {
           toast.error(result.message);
@@ -49,22 +51,24 @@ const Login = () => {
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="card border-0 shadow login">
               <div className="card-body p-4">
-                <h3 className="border-bottom pb-3 mb-3">Login</h3>
+                <h3 className="border-bottom pb-3 mb-3">
+                  {trans("login.title")}
+                </h3>
                 <div className="mb-3">
                   <label className="form-label" htmlFor="email">
-                    Email
+                    {trans("login.email")}
                   </label>
                   <input
                     {...register("email", {
-                      required: "The email field is required.",
+                      required: trans("login.errors.emailRequired"),
                       pattern: {
                         value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                        message: "Invalid email address",
+                        message: trans("login.errors.emailInvalid"),
                       },
                     })}
                     type="text"
                     className={`form-control ${errors.email && "is-invalid"}`}
-                    placeholder="Email"
+                    placeholder={trans("login.email")}
                   />
                   {errors.email && (
                     <p className="invalid-feedback">{errors.email.message}</p>
@@ -73,15 +77,15 @@ const Login = () => {
 
                 <div className="mb-3">
                   <label className="form-label" htmlFor="password">
-                    Password
+                    {trans("login.password")}
                   </label>
                   <input
                     {...register("password", {
-                      required: "The password field is required.",
+                      required: trans("login.errors.passwordRequired"),
                     })}
                     type="password"
                     className={`form-control ${errors.password && "is-invalid"}`}
-                    placeholder="Password"
+                    placeholder={trans("login.password")}
                   />
                   {errors.password && (
                     <p className="invalid-feedback">
@@ -91,9 +95,11 @@ const Login = () => {
                 </div>
 
                 <div className="d-flex justify-content-between align-items-center">
-                  <button className="btn btn-primary">Login</button>
+                  <button className="btn btn-primary">
+                    {trans("login.btn")}
+                  </button>
                   <Link to={`/account/register`} className="text-secondary">
-                    Register Here
+                    {trans("login.registerHere")}
                   </Link>
                 </div>
               </div>

@@ -5,8 +5,10 @@ import {apiUrl} from '../common/Config'
 import { Link, useSearchParams } from 'react-router-dom'
 import Loading from '../common/Loading'
 import NotFound from '../common/NotFound'
+import { useTranslation } from 'react-i18next'
 
 const Courses = () => {
+    const { t: trans } = useTranslation()
     const [searchParams, setSearchParams] = useSearchParams();
     const [categories, setCategories] = useState([]);
     const [keyword, setKeyword] = useState('');
@@ -181,8 +183,8 @@ const Courses = () => {
         <div className='container pb-5 pt-3'>
             <nav aria-label="breadcrumb">
                 <ol className="breadcrumb">
-                    <li className="breadcrumb-item"><a href="#">Home</a></li>
-                    <li className="breadcrumb-item active" aria-current="page">Courses</li>
+                    <li className="breadcrumb-item"><a href="#">{trans("courses.home")}</a></li>
+                    <li className="breadcrumb-item active" aria-current="page">{trans("courses.title")}</li>
                 </ol>
             </nav>
             <div className='row'>
@@ -195,14 +197,14 @@ const Courses = () => {
                                     onChange={(e) => setKeyword(e.target.value)}
                                     type="text" 
                                     className='form-control' 
-                                    placeholder='Search by keyword'/>
+                                    placeholder={trans("courses.searchPlaceholder")}/>
                                 <button className="btn btn-primary btn-sm">
-                                    Search                                
+                                    {trans("courses.searchBtn")}
                                 </button>
                             </div>
 
                             <div className='pt-3'>
-                                <h3 className='h5 mb-2'>Category</h3>
+                                <h3 className='h5 mb-2'>{trans("courses.category")}</h3>
                                 <ul>
                                     {
                                         categories && categories.map(category => {
@@ -229,7 +231,7 @@ const Courses = () => {
                                 </ul>
                             </div>
                             <div className='mb-3'>
-                                <h3 className='h5  mb-2'>Level</h3>
+                                <h3 className='h5  mb-2'>{trans("courses.level")}</h3>
                                 <ul>
                                     {
                                         levels && levels.map(level => {
@@ -256,7 +258,7 @@ const Courses = () => {
                                 </ul>
                             </div>
                             <div className='mb-3'>
-                                <h3 className='h5 mb-2'>Language</h3>
+                                <h3 className='h5 mb-2'>{trans("courses.language")}</h3>
                                 <ul>
                                     {
                                         languages && languages.map(language => {
@@ -282,7 +284,7 @@ const Courses = () => {
                                                                            
                                 </ul>
                             </div>
-                            <Link onClick={() => clearFilters()}  className='clear-filter'>Clear All Filters</Link>
+                            <Link onClick={() => clearFilters()}  className='clear-filter'>{trans("courses.clearFilters")}</Link>
                         </div>
                     </div>
                 </div>
@@ -297,8 +299,8 @@ const Courses = () => {
                                     value={sort}
                                     onChange={(e) => setSort(e.target.value)}
                                     className='form-select'>
-                                    <option value="desc">Newset First</option>
-                                    <option value="asc">Oldest First</option>
+                                    <option value="desc">{trans("courses.newestFirst")}</option>
+                                    <option value="asc">{trans("courses.oldestFirst")}</option>
                                 </select>
                             </div>
                         </div> 

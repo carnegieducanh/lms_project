@@ -1,0 +1,93 @@
+{
+  "nav": {
+    "allCourses": "すべてのコース",
+    "myAccount": "マイアカウント"
+  },
+  "sidebar": {
+    "dashboard": "ダッシュボード",
+    "profile": "プロフィール",
+    "myLearning": "マイラーニング",
+    "myCourses": "マイコース",
+    "changePassword": "パスワード変更",
+    "logout": "ログアウト"
+  },
+  "login": {
+    "title": "ログイン",
+    "email": "メールアドレス",
+    "password": "パスワード",
+    "btn": "ログイン",
+    "registerHere": "新規登録",
+    "success": "ログインしました！",
+    "errors": {
+      "emailRequired": "メールアドレスは必須です。",
+      "emailInvalid": "無効なメールアドレスです。",
+      "passwordRequired": "パスワードは必須です。"
+    }
+  },
+  "hero": {
+    "title": "いつでも、どこでも学べる",
+    "description": "学習管理システムに参加して、スキルアップとキャリアの成長に役立つ幅広いコースをご覧ください。",
+    "exploreCourses": "コースを探す"
+  },
+  "featuredCourses": {
+    "title": "おすすめコース",
+    "description": "あなたの仕事とキャリアの成長に役立つコースをご覧ください。"
+  },
+  "featuredCategories": {
+    "title": "カテゴリーを探す",
+    "description": "あなたの仕事とキャリアの成長に役立つカテゴリーをご覧ください。"
+  },
+  "courses": {
+    "home": "ホーム",
+    "title": "コース一覧",
+    "searchPlaceholder": "キーワードで検索",
+    "searchBtn": "検索",
+    "category": "カテゴリー",
+    "level": "レベル",
+    "language": "言語",
+    "clearFilters": "フィルターをクリア",
+    "newestFirst": "新しい順",
+    "oldestFirst": "古い順"
+  },
+  "editCourse": {
+    "account": "アカウント",
+    "breadcrumb": "コースを編集",
+    "title": "コースを編集",
+    "publish": "公開する",
+    "unpublish": "非公開にする",
+    "back": "戻る",
+    "courseDetails": "コース詳細",
+    "titleLabel": "タイトル",
+    "titleRequired": "タイトルは必須です。",
+    "categoryLabel": "カテゴリー",
+    "categoryRequired": "カテゴリーは必須です。",
+    "selectCategory": "カテゴリーを選択",
+    "levelLabel": "レベル",
+    "levelRequired": "レベルは必須です。",
+    "selectLevel": "レベルを選択",
+    "languageLabel": "言語",
+    "languageRequired": "言語は必須です。",
+    "selectLanguage": "言語を選択",
+    "descriptionLabel": "説明",
+    "update": "更新する",
+    "pleaseWait": "処理中..."
+  },
+  "enrollment": {
+    "watchNow": "今すぐ見る",
+    "leaveRating": "評価する"
+  },
+  "myLearning": {
+    "title": "マイラーニング",
+    "empty": "まだコースに参加していません。"
+  },
+  "myCourses": {
+    "title": "マイコース",
+    "create": "作成",
+    "empty": "まだコースを作成していません。"
+  },
+  "common": {
+    "readMore": "詳細を見る",
+    "logoutSuccess": "ログアウトしました！",
+    "loading": "読み込み中..."
+  }
+}

@@ -9,9 +9,11 @@ import ManageOutcome from "./ManageOutcome";
 import ManageRequirement from "./ManageRequirement";
 import EditCover from "./EditCover";
 import ManageChapter from "./ManageChapter";
+import { useTranslation } from "react-i18next";
 
 const EditCourse = () => {
   const params = useParams();
+  const { t: trans } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [course, setCourse] = useState([]);
 
@@ -134,24 +136,24 @@ const EditCourse = () => {
           <nav aria-label="breadcrumb">
             <ol className="breadcrumb">
               <li className="breadcrumb-item">
-                <Link to="/account">Account</Link>
+                <Link to="/account">{trans("editCourse.account")}</Link>
               </li>
               <li className="breadcrumb-item active" aria-current="page">
-                Edit Course
+                {trans("editCourse.breadcrumb")}
               </li>
             </ol>
           </nav>
           <div className="row">
             <div className="col-md-12 mt-5 mb-3">
               <div className="d-flex justify-content-between">
-                <h2 className="h4 mb-0 pb-0">Edit Course</h2>
+                <h2 className="h4 mb-0 pb-0">{trans("editCourse.title")}</h2>
                 <div>
                   {course.status == 0 && (
                     <Link
                       onClick={() => changeStatus(course)}
                       className="btn btn-secondary"
                     >
-                      Publish
+                      {trans("editCourse.publish")}
                     </Link>
                   )}
 
@@ -160,7 +162,7 @@ const EditCourse = () => {
                       onClick={() => changeStatus(course)}
                       className="btn btn-primary"
                     >
-                      Unpublish
+                      {trans("editCourse.unpublish")}
                     </Link>
                   )}
 
@@ -168,7 +170,7 @@ const EditCourse = () => {
                     to={`/account/my-courses`}
                     className="btn btn-light ms-2"
                   >
-                    Back
+                    {trans("editCourse.back")}
                   </Link>
                 </div>
               </div>
@@ -183,19 +185,19 @@ const EditCourse = () => {
                     <div className="card border-0 shadow-lg">
                       <div className="card-body p-4">
                         <h4 className="h5 border-bottom pb-3 mb-3">
-                          Course Details
+                          {trans("editCourse.courseDetails")}
                         </h4>
                         <div className="mb-3">
                           <label className="form-label" htmlFor="title">
-                            Title
+                            {trans("editCourse.titleLabel")}
                           </label>
                           <input
                             type="text"
                             {...register("title", {
-                              required: "The title field is required.",
+                              required: trans("editCourse.titleRequired"),
                             })}
                             className={`form-control ${errors.title && "is-invalid"}`}
-                            placeholder="Title"
+                            placeholder={trans("editCourse.titleLabel")}
                           />
                           {errors.title && (
                             <p className="invalid-feedback">
@@ -205,16 +207,16 @@ const EditCourse = () => {
                         </div>
                         <div className="mb-3">
                           <label className="form-label" htmlFor="category">
-                            Category
+                            {trans("editCourse.categoryLabel")}
                           </label>
                           <select
                             className={`form-select ${errors.category && "is-invalid"}`}
                             id="category"
                             {...register("category", {
-                              required: "The category field is required.",
+                              required: trans("editCourse.categoryRequired"),
                             })}
                           >
-                            <option value="">Select a Category</option>
+                            <option value="">{trans("editCourse.selectCategory")}</option>
                             {categories &&
                               categories.map((category) => {
                                 return (
@@ -232,16 +234,16 @@ const EditCourse = () => {
                         </div>
                         <div className="mb-3">
                           <label className="form-label" htmlFor="level">
-                            Level
+                            {trans("editCourse.levelLabel")}
                           </label>
                           <select
                             className={`form-select ${errors.level && "is-invalid"}`}
                             id="level"
                             {...register("level", {
-                              required: "The level field is required.",
+                              required: trans("editCourse.levelRequired"),
                             })}
                           >
-                            <option value="">Select a Level</option>
+                            <option value="">{trans("editCourse.selectLevel")}</option>
                             {levels &&
                               levels.map((level) => {
                                 return (
@@ -259,16 +261,16 @@ const EditCourse = () => {
                         </div>
                         <div className="mb-3">
                           <label className="form-label" htmlFor="language">
-                            Language
+                            {trans("editCourse.languageLabel")}
                           </label>
                           <select
                             {...register("language", {
-                              required: "The language field is required.",
+                              required: trans("editCourse.languageRequired"),
                             })}
                             className={`form-select ${errors.language && "is-invalid"}`}
                             id="language"
                           >
-                            <option value="">Select a Language</option>
+                            <option value="">{trans("editCourse.selectLanguage")}</option>
                             {languages &&
                               languages.map((language) => {
                                 return (
@@ -287,19 +289,19 @@ const EditCourse = () => {
 
                         <div className="mb-3">
                           <label className="form-label" htmlFor="description">
-                            Description
+                            {trans("editCourse.descriptionLabel")}
                           </label>
                           <textarea
                             {...register("description")}
                             id="description"
                             rows={5}
-                            placeholder="Description"
+                            placeholder={trans("editCourse.descriptionLabel")}
                             className="form-control"
                           ></textarea>
                         </div>
 
                         <button disabled={loading} className="btn btn-primary">
-                          {loading == false ? "Update" : "Please wait..."}
+                          {loading == false ? trans("editCourse.update") : trans("editCourse.pleaseWait")}
                         </button>
                       </div>
                     </div>

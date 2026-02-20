@@ -4,9 +4,11 @@ import CourseEnrolled from "../../common/CourseEnrolled"
 import Layout from "../../common/Layout"
 import Loading from "../../common/Loading"
 import { apiUrl, token } from "../../common/Config"
+import { useTranslation } from "react-i18next"
 
 const MyLearning = () => {
-    const [enrollments, setEnrollments] = useState([])
+  const { t: trans } = useTranslation()
+  const [enrollments, setEnrollments] = useState([])
     const [loading, setLoading] = useState(true)
 
     const fetchEnrollments = async () => {
@@ -42,7 +44,7 @@ const MyLearning = () => {
                 <div className="container">
                     <div className="row">
                         <div className="d-flex justify-content-between  mt-5 mb-3">
-                            <h2 className="h4 mb-0 pb-0">My Learning</h2>
+                            <h2 className="h4 mb-0 pb-0">{trans("myLearning.title")}</h2>
                         </div>
                         <div className="col-lg-3 account-sidebar">
                             <UserSidebar />
@@ -63,7 +65,7 @@ const MyLearning = () => {
                                     })}
                                     {enrollments.length === 0 && (
                                         <div className="col-12 text-center text-muted py-5">
-                                            <p>Bạn chưa tham gia khóa học nào.</p>
+                                            <p>{trans("myLearning.empty")}</p>
                                         </div>
                                     )}
                                 </div>

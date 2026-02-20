@@ -1,7 +1,9 @@
 import React from "react"
 import { Link } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 
 const CourseEnrolled = ({enrollment}) => {
+    const { t: trans } = useTranslation()
     return (
         <div className="col-md-4">
             <div className="card border-0">
@@ -74,10 +76,10 @@ const CourseEnrolled = ({enrollment}) => {
                     <div className="d-flex py-2 justify-content-between align-items-center">
                         <div className="add-to-cart">
                             <Link to={`/account/watch-course/${enrollment.course_id}`} className="btn btn-primary">
-                                Watch Now
+                                {trans("enrollment.watchNow")}
                             </Link>
                         </div>
-                        <Link to={`/account/leave-rating/${enrollment.course_id}`}>Leave Rating</Link>
+                        <Link to={`/account/leave-rating/${enrollment.course_id}`}>{trans("enrollment.leaveRating")}</Link>
                     </div>
                 </div>
             </div>

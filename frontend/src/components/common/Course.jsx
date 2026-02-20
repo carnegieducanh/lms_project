@@ -1,8 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { convertMinutesToHours } from './Config'
+import { useTranslation } from 'react-i18next'
 
 const Course = ({course,customClasses}) => {
+  const { t: trans } = useTranslation()
   return (
     <div className={customClasses}>
         <div className='card border-0'>
@@ -63,7 +65,7 @@ const Course = ({course,customClasses}) => {
                     )}
 
                     <div className="add-to-cart">
-                        <Link to={`/detail/${course.id}`} className="btn btn-primary">Read More</Link>
+                        <Link to={`/detail/${course.id}`} className="btn btn-primary">{trans("common.readMore")}</Link>
                     </div>
                 </div>
             </div>

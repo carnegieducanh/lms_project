@@ -1,0 +1,93 @@
+{
+  "nav": {
+    "allCourses": "All Courses",
+    "myAccount": "My Account"
+  },
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "profile": "Profile",
+    "myLearning": "My Learning",
+    "myCourses": "My Courses",
+    "changePassword": "Change Password",
+    "logout": "Logout"
+  },
+  "login": {
+    "title": "Login",
+    "email": "Email",
+    "password": "Password",
+    "btn": "Login",
+    "registerHere": "Register Here",
+    "success": "Login successful!",
+    "errors": {
+      "emailRequired": "The email field is required.",
+      "emailInvalid": "Invalid email address.",
+      "passwordRequired": "The password field is required."
+    }
+  },
+  "hero": {
+    "title": "Learn Anytime, Anywhere",
+    "description": "Join our Learning Management System and explore a wide range of courses to enhance your skills and achieve your goals.",
+    "exploreCourses": "Explore Courses"
+  },
+  "featuredCourses": {
+    "title": "Featured Courses",
+    "description": "Discover courses designed to help you excel in your professional and personal growth."
+  },
+  "featuredCategories": {
+    "title": "Explore Categories",
+    "description": "Discover categories designed to help you excel in your professional and personal growth."
+  },
+  "courses": {
+    "home": "Home",
+    "title": "Courses",
+    "searchPlaceholder": "Search by keyword",
+    "searchBtn": "Search",
+    "category": "Category",
+    "level": "Level",
+    "language": "Language",
+    "clearFilters": "Clear All Filters",
+    "newestFirst": "Newest First",
+    "oldestFirst": "Oldest First"
+  },
+  "editCourse": {
+    "account": "Account",
+    "breadcrumb": "Edit Course",
+    "title": "Edit Course",
+    "publish": "Publish",
+    "unpublish": "Unpublish",
+    "back": "Back",
+    "courseDetails": "Course Details",
+    "titleLabel": "Title",
+    "titleRequired": "The title field is required.",
+    "categoryLabel": "Category",
+    "categoryRequired": "The category field is required.",
+    "selectCategory": "Select a Category",
+    "levelLabel": "Level",
+    "levelRequired": "The level field is required.",
+    "selectLevel": "Select a Level",
+    "languageLabel": "Language",
+    "languageRequired": "The language field is required.",
+    "selectLanguage": "Select a Language",
+    "descriptionLabel": "Description",
+    "update": "Update",
+    "pleaseWait": "Please wait..."
+  },
+  "enrollment": {
+    "watchNow": "Watch Now",
+    "leaveRating": "Leave Rating"
+  },
+  "myLearning": {
+    "title": "My Learning",
+    "empty": "You haven't enrolled in any courses yet."
+  },
+  "myCourses": {
+    "title": "My Courses",
+    "create": "Create",
+    "empty": "You haven't created any courses yet."
+  },
+  "common": {
+    "readMore": "Read More",
+    "logoutSuccess": "Logged out successfully!",
+    "loading": "Loading..."
+  }
+}

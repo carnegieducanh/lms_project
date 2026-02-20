@@ -9,10 +9,36 @@ $tertiary-color: #3ecbda;
 $bg-light: #f6f3f3;
 $text-grey: #585858;
 
+// ─── CSS Custom Properties (Light Mode mặc định) ───────────────────────────
+// Các biến này thay đổi khi Bootstrap đặt data-bs-theme="dark" lên <html>
+:root {
+  --bg-body:       #{$bg-light};
+  --bg-card:       #ffffff;
+  --bg-navbar:     #ffffff;
+  --text-primary:  #{$primary-black};
+  --text-secondary: #{$text-grey};
+  --border-color:  #eaeaea;
+  --sidebar-border: #ccc;
+}
+
+// ─── Dark Mode overrides ────────────────────────────────────────────────────
+// Kích hoạt khi ThemeContext gọi document.documentElement.setAttribute('data-bs-theme', 'dark')
+[data-bs-theme="dark"] {
+  --bg-body:        #1a1a2e;
+  --bg-card:        #16213e;
+  --bg-navbar:      #0f1629;
+  --text-primary:   #e0e0e0;
+  --text-secondary: #a0a0a0;
+  --border-color:   #2d3561;
+  --sidebar-border: #2d3561;
+}
+
 body{
-   font-family: $primary-font; 
-   background-color: $bg-light;
+   font-family: $primary-font;
+   background-color: var(--bg-body);
+   color: var(--text-primary);
    font-size: 1em;
+   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 ul{
@@ -51,7 +77,7 @@ h4,
 }
 
 a{
-    color:$primary-black;
+    color: var(--text-primary);
     text-decoration: none;
     &:hover{
         color: $secondary-color;
@@ -93,6 +119,8 @@ p{
  
     
 .header{
+    background-color: var(--bg-navbar) !important;
+    transition: background-color 0.3s ease;
     .nav-link{
         font-weight: 700;
     }
@@ -147,6 +175,9 @@ p{
 
 .section-3{
     .card{
+        background-color: var(--bg-card);
+        border-color: var(--border-color);
+        transition: background-color 0.3s ease;
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
         img{
@@ -156,7 +187,7 @@ p{
         .card-title{
             font-size: 1.2em;
             font-weight: 600;
-            color: $primary-black;
+            color: var(--text-primary);
         }
         .card-body{
             .level{           
@@ -198,6 +229,9 @@ p{
 
 .section-4{
     .card{
+        background-color: var(--bg-card);
+        border-color: var(--border-color);
+        transition: background-color 0.3s ease;
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
         img{
@@ -207,7 +241,7 @@ p{
         .card-title{
             font-size: 1.2em;
             font-weight: 600;
-            color: $primary-black;
+            color: var(--text-primary);
         }
         .card-body{
             .level{           
@@ -261,7 +295,7 @@ p{
         padding: 15px 0;
         font-size: 16px;
         font-weight: 500;
-        color: $text-grey;
+        color: var(--text-secondary);
     }
     .accordion-button:not(.collapsed){
         background: none;
@@ -273,7 +307,7 @@ p{
         a{
             font-size: 16px;
             font-weight: 500;
-            color: $text-grey;
+            color: var(--text-secondary);
             &:hover{
                 color: $secondary-color;
             }
@@ -285,24 +319,25 @@ p{
     margin-top: 55px;
     border-radius: 10px;
     .card-body{
+        background-color: var(--bg-card);
         border-radius: 10px;
         .form-control{
             border-radius: 10px;
         }
         h3{
             font-size: 1em;
-            color: $text-grey;
+            color: var(--text-secondary);
         }
         ul{
             li{
                 padding-bottom: 5px;
-                color: $text-grey;
+                color: var(--text-secondary);
                 font-size: 1em;
             }
             padding-bottom: 10px;
-            border-bottom: 1px solid #eaeaea;
-            
-        }       
+            border-bottom: 1px solid var(--border-color);
+
+        }
     }
 }
 
@@ -333,7 +368,7 @@ footer{
 
 
 .clear-filter{
-    color: $text-grey;
+    color: var(--text-secondary);
 }
 
 .login, 
@@ -346,14 +381,35 @@ footer{
         li{
             a{
                 font-size: 1em;
-                font-weight: 500;                
+                font-weight: 500;
             }
             padding: 10px 0;
-            border-bottom: 1px solid #ccc;
+            border-bottom: 1px solid var(--sidebar-border);
         }
         li:last-child{
             border-bottom:none;
         }
+    }
+}
+
+// ─── Dark Mode Toggle Button ────────────────────────────────────────────────
+.theme-toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    border-radius: 50%;
+    border: 1px solid var(--border-color) !important;
+    background: transparent;
+    color: var(--text-primary);
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+
+    &:hover {
+        background-color: $secondary-color;
+        border-color: $secondary-color !important;
+        color: #fff;
     }
 }
 

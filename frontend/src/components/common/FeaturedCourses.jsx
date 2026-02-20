@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Course from "./Course";
 import { apiUrl, token } from "./Config";
+import { useTranslation } from "react-i18next";
 
 const FeaturedCourses = () => {
   const [courses, setCourses] = useState([]);
+  const { t: trans } = useTranslation();
 
   const fetchFeaturedCourses = () => {
     fetch(`${apiUrl}/fetch-featured-courses`, {
@@ -32,11 +34,8 @@ const FeaturedCourses = () => {
     <section className="section-3 my-5">
       <div className="container">
         <div className="section-title py-3  mt-4">
-          <h2 className="h3">Featured Courses</h2>
-          <p>
-            Discover courses designed to help you excel in your professional and
-            personal growth.
-          </p>
+          <h2 className="h3">{trans("featuredCourses.title")}</h2>
+          <p>{trans("featuredCourses.description")}</p>
         </div>
         <div className="row gy-4">
           {courses &&
