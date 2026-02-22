@@ -3,6 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import { useForm } from "react-hook-form";
 import { apiUrl, token } from "../../../common/Config";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 const UpdateOutcome = ({
   outcomeData,
@@ -11,6 +12,7 @@ const UpdateOutcome = ({
   outcomes,
   setOutcomes,
 }) => {
+  const { t: trans } = useTranslation();
   const [loading, setLoading] = useState(false);
   const {
     register,
@@ -60,20 +62,20 @@ const UpdateOutcome = ({
       <Modal size="lg" show={showOutcome} onHide={handleClose}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Modal.Header closeButton>
-            <Modal.Title>Update Outcome</Modal.Title>
+            <Modal.Title>{trans("updateOutcome.title")}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className="mb-3">
               <label htmlFor="" className="form-label">
-                Outcome
+                {trans("updateOutcome.label")}
               </label>
               <input
                 {...register("outcome", {
-                  required: "The outcome field is required.",
+                  required: trans("updateOutcome.required"),
                 })}
                 type="text"
                 className={`form-control ${errors.outcome && "is-invalid"}`}
-                placeholder="Outcome"
+                placeholder={trans("updateOutcome.placeholder")}
               />
               {errors.outcome && (
                 <p className="invalid-feedback">{errors.outcome.message}</p>
@@ -82,7 +84,7 @@ const UpdateOutcome = ({
           </Modal.Body>
           <Modal.Footer>
             <button disabled={loading} className="btn btn-primary">
-              {loading == false ? "Save" : "Please wait..."}
+              {loading == false ? trans("common.save") : trans("common.pleaseWait")}
             </button>
           </Modal.Footer>
         </form>

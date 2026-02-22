@@ -70,7 +70,11 @@
     "selectLanguage": "Select a Language",
     "descriptionLabel": "Description",
     "update": "Update",
-    "pleaseWait": "Please wait..."
+    "pleaseWait": "Please wait...",
+    "published": "Published",
+    "draft": "Draft",
+    "edit": "Edit",
+    "delete": "Delete"
   },
   "enrollment": {
     "watchNow": "Watch Now",
@@ -88,6 +92,158 @@
   "common": {
     "readMore": "Read More",
     "logoutSuccess": "Logged out successfully!",
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "pleaseWait": "Please wait...",
+    "account": "Account",
+    "preview": "Preview"
+  },
+  "footer": {
+    "description": "Join our Learning Management System and explore a wide range of courses to enhance your skills and achieve your goals.",
+    "popularCategories": "Popular Categories",
+    "quickLinks": "Quick Links",
+    "login": "Login",
+    "register": "Register",
+    "myAccount": "My Account",
+    "courses": "Courses",
+    "copyright": "© 2025 All Rights Reserved"
+  },
+  "profile": {
+    "title": "Profile",
+    "nameLabel": "Name",
+    "emailLabel": "Email",
+    "namePlaceholder": "Name",
+    "emailPlaceholder": "Email",
+    "nameRequired": "The name field is required.",
+    "emailRequired": "The email field is required.",
+    "emailInvalid": "Invalid email address",
+    "update": "Update"
+  },
+  "changePassword": {
+    "title": "Change Password",
+    "oldPassword": "Old Password",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm Password",
+    "oldPlaceholder": "Old Password",
+    "newPlaceholder": "New Password",
+    "confirmPlaceholder": "New Password",
+    "oldRequired": "The old password field is required.",
+    "newRequired": "The new password field is required.",
+    "confirmRequired": "Please confirm your password.",
+    "passwordMismatch": "Password do not match.",
+    "btn": "Change Password"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "totalUsers": "Total Users",
+    "enrolledUsers": "Enrolled Users",
+    "activeCourses": "Active Courses",
+    "viewCourses": "View Courses"
+  },
+  "manageChapter": {
+    "title": "Chapters",
+    "addLesson": "Add Lesson",
+    "reorderChapters": "Reorder Chapters",
+    "chapterPlaceholder": "Chapter",
+    "chapterRequired": "The chapter field is required.",
+    "lessons": "Lessons",
+    "reorderLessons": "Reorder Lessons",
+    "deleteChapter": "Delete Chapter",
+    "updateChapter": "Update Chapter"
+  },
+  "manageOutcome": {
+    "title": "Outcome",
+    "placeholder": "Outcome",
+    "required": "The outcome field is required."
+  },
+  "manageRequirement": {
+    "title": "Requirement",
+    "placeholder": "Requirement",
+    "required": "The requirement field is required."
+  },
+  "updateChapter": {
+    "title": "Update Chapter",
+    "label": "Chapter",
+    "placeholder": "Chapter",
+    "required": "The chapter field is required."
+  },
+  "updateOutcome": {
+    "title": "Update Outcome",
+    "label": "Outcome",
+    "placeholder": "Outcome",
+    "required": "The outcome field is required."
+  },
+  "updateRequirement": {
+    "title": "Update Requirement",
+    "label": "Requirement",
+    "placeholder": "Requirement",
+    "required": "The requirement field is required."
+  },
+  "createLesson": {
+    "title": "Create Lesson",
+    "chapter": "Chapter",
+    "selectChapter": "Select a Chapter",
+    "chapterRequired": "Please select a Chapter.",
+    "lesson": "Lesson",
+    "lessonPlaceholder": "Lesson",
+    "lessonRequired": "The lesson field is required.",
+    "status": "Status",
+    "active": "Active",
+    "block": "Block",
+    "statusRequired": "The status field is required."
+  },
+  "sortChapters": {
+    "title": "Sort Chapters"
+  },
+  "editLesson": {
+    "title": "Edit Lesson",
+    "back": "Back",
+    "basicInfo": "Basic Information",
+    "titleLabel": "Title",
+    "titleRequired": "The title field is required.",
+    "titlePlaceholder": "Title",
+    "chapterLabel": "Chapter",
+    "chapterRequired": "Please select a chapter.",
+    "selectChapter": "Select a Chapter",
+    "durationLabel": "Duration (Mins)",
+    "durationRequired": "The duration field is required.",
+    "durationPlaceholder": "Duration",
+    "descriptionLabel": "Description",
+    "statusLabel": "Status",
+    "active": "Active",
+    "block": "Block",
+    "statusRequired": "The status field is required.",
+    "freeLesson": "Free Lesson",
+    "update": "Update",
+    "lessonVideo": "Lesson Video",
+    "dragDrop": "Drag & Drop your files or <span class=\"filepond--label-action\">Browse</span>"
+  },
+  "detail": {
+    "breadcrumbCourses": "Courses",
+    "level": "Level",
+    "students": "Students",
+    "overview": "Overview",
+    "whatYouWillLearn": "What you will learn",
+    "requirements": "Requirements",
+    "courseStructure": "Course Structure",
+    "chapters": "Chapters",
+    "lectures": "Lectures",
+    "lecturesShort": "lectures",
+    "reviews": "Reviews",
+    "reviewsSubtitle": "Our student says about this course",
+    "enroll": "Enroll",
+    "loginToEnroll": "Please login to enroll in this course",
+    "courseIncludes": "This course includes",
+    "fullAccess": "Full lifetime access",
+    "mobileAccess": "Access on mobile and TV",
+    "certificate": "Certificate of completion"
+  },
+  "time": {
+    "hr": "hr",
+    "hrs": "hrs",
+    "min": "min",
+    "mins": "mins"
   }
 }

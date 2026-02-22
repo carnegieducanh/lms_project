@@ -79,4 +79,5 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/fetch-user', [AccountController::class, 'fetchUser']);
     Route::post('/update-user', [AccountController::class, 'updateUser']);
     Route::post('/update-password', [AccountController::class, 'updatePassword']);
+    Route::get('/dashboard-stats', [AccountController::class, 'dashboardStats']);
 });

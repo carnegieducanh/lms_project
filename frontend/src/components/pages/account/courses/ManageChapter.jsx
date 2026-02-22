@@ -12,8 +12,10 @@ import { FaTrashAlt } from "react-icons/fa";
 import LessonsSort from "./LessonsSort";
 import SortChapters from "./SortChapters";
 import { AiOutlineDrag } from "react-icons/ai";
+import { useTranslation } from "react-i18next";
 
 const ManageChapter = ({ course, params }) => {
+  const { t: trans } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -158,17 +160,17 @@ const ManageChapter = ({ course, params }) => {
         <div className="card-body p-4">
           <div className="d-flex">
             <div className="d-flex justify-content-between w-100">
-              <h4 className="h5 mb-3">Chapters</h4>
+              <h4 className="h5 mb-3">{trans("manageChapter.title")}</h4>
               <div>
                 <Link onClick={() => handleShowLessonModal()}>
-                  <FaPlus size={12} /> <strong>Add Lesson</strong>
+                  <FaPlus size={12} /> <strong>{trans("manageChapter.addLesson")}</strong>
                 </Link>
                 <Link
                   className="ms-2"
                   onClick={() => handleShowChapterSortModal()}
                 >
                   {" "}
-                  <AiOutlineDrag /> <strong>Reorder Chapters</strong>
+                  <AiOutlineDrag /> <strong>{trans("manageChapter.reorderChapters")}</strong>
                 </Link>
               </div>
             </div>
@@ -177,18 +179,18 @@ const ManageChapter = ({ course, params }) => {
             <div className="mb-3">
               <input
                 {...register("chapter", {
-                  required: "The chapter field is required.",
+                  required: trans("manageChapter.chapterRequired"),
                 })}
                 type="text"
                 className={`form-control ${errors.chapter && "is-invalid"}`}
-                placeholder="Chapter"
+                placeholder={trans("manageChapter.chapterPlaceholder")}
               />
               {errors.chapter && (
                 <p className="invalid-feedback">{errors.chapter.message}</p>
               )}
             </div>
             <button disabled={loading} className="btn btn-primary">
-              {loading == false ? "Save" : "Please wait..."}
+              {loading == false ? trans("common.save") : trans("common.pleaseWait")}
             </button>
           </form>
 
@@ -201,7 +203,7 @@ const ManageChapter = ({ course, params }) => {
                     <div className="row">
                       <div className="col-md-12">
                         <div className="d-flex justify-content-between mb-2 mt-4">
-                          <h4 className="h5">Lessons</h4>
+                          <h4 className="h5">{trans("manageChapter.lessons")}</h4>
                           <Link
                             className="h6"
                             onClick={() =>
@@ -209,7 +211,7 @@ const ManageChapter = ({ course, params }) => {
                             }
                             data-discover="true"
                           >
-                            <strong>Reorder Lessons</strong>
+                            <strong>{trans("manageChapter.reorderLessons")}</strong>
                           </Link>
                         </div>
                       </div>
@@ -233,7 +235,7 @@ const ManageChapter = ({ course, params }) => {
 
                                     {lesson.is_free_preview == "yes" && (
                                       <span className="badge bg-success">
-                                        Preview
+                                        {trans("common.preview")}
                                       </span>
                                     )}
 
@@ -262,13 +264,13 @@ const ManageChapter = ({ course, params }) => {
                             onClick={() => deleteChapter(chapter.id)}
                             className="btn btn-danger btn-sm"
                           >
-                            Delete Chapter
+                            {trans("manageChapter.deleteChapter")}
                           </button>
                           <button
                             onClick={() => handleShow(chapter)}
                             className="btn btn-primary btn-sm ms-2"
                           >
-                            Update Chapter
+                            {trans("manageChapter.updateChapter")}
                           </button>
                         </div>
                       </div>

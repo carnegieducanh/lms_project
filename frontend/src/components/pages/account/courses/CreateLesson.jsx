@@ -3,9 +3,10 @@ import Modal from 'react-bootstrap/Modal';
 import { useForm } from 'react-hook-form';
 import { apiUrl, token } from '../../../common/Config';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 
 const CreateLesson = ({showLessonModal,handleCloseLessonModal,course,chapters}) => {
-
+    const { t: trans } = useTranslation();
     const [loading, setLoading] = useState(false);
     const { register, handleSubmit, formState: {errors}, reset} = useForm();
 
@@ -44,21 +45,21 @@ const CreateLesson = ({showLessonModal,handleCloseLessonModal,course,chapters}) 
       <Modal size='lg' show={showLessonModal} onHide={handleCloseLessonModal}>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Create Lesson</Modal.Title>
+                    <Modal.Title>{trans("createLesson.title")}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div className='mb-3'>
                         <label htmlFor="" className='form-label'>
-                            Chapter
+                            {trans("createLesson.chapter")}
                         </label>
-                        <select 
+                        <select
                             {
                                 ...register('chapter',{
-                                    required: "Please select a Chapter."
+                                    required: trans("createLesson.chapterRequired")
                                 })
                             }
                             className={`form-select ${errors.chapter && 'is-invalid'}` }>
-                            <option value="">Select a Chapter</option>
+                            <option value="">{trans("createLesson.selectChapter")}</option>
                             {
                                 chapters && chapters.map(chapter => {
                                     return (
@@ -74,17 +75,17 @@ const CreateLesson = ({showLessonModal,handleCloseLessonModal,course,chapters}) 
 
                     <div className='mb-3'>
                         <label htmlFor="" className='form-label'>
-                            Lesson
+                            {trans("createLesson.lesson")}
                         </label>
-                        <input 
+                        <input
                             {
                                 ...register('lesson',{
-                                    required: "The lesson field is required."
+                                    required: trans("createLesson.lessonRequired")
                                 })
                             }
-                            type="text" 
+                            type="text"
                             className={`form-control ${errors.lesson && 'is-invalid'}` }
-                            placeholder='Lesson' 
+                            placeholder={trans("createLesson.lessonPlaceholder")}
                         />
                         {
                             errors.lesson && <p className='invalid-feedback'>{errors.lesson.message}</p>
@@ -92,25 +93,25 @@ const CreateLesson = ({showLessonModal,handleCloseLessonModal,course,chapters}) 
                     </div>
                     <div>
                         <label htmlFor="" className='form-label'>
-                            Status
+                            {trans("createLesson.status")}
                         </label>
                         <select
                             {
                                 ...register('status',{
-                                    required: "The status field is required."
+                                    required: trans("createLesson.statusRequired")
                                 })
                             }
                             className='form-select'>
-                            <option value="1" selected>Active</option>
-                            <option value="0">Block</option>
+                            <option value="1" selected>{trans("createLesson.active")}</option>
+                            <option value="0">{trans("createLesson.block")}</option>
                         </select>
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
-                    <button 
+                    <button
                         disabled={loading}
                         className='btn btn-primary'>
-                        { loading == false ? 'Save' : 'Please wait...'}
+                        { loading == false ? trans("common.save") : trans("common.pleaseWait")}
                     </button>
                 </Modal.Footer>
             </form>

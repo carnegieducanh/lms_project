@@ -6,8 +6,10 @@ import UserSidebar from '../../common/UserSidebar'
 import { apiUrl, token } from '../../common/Config'
 import Loading from '../../common/Loading'
 import toast from 'react-hot-toast'
+import { useTranslation } from 'react-i18next'
 
 const Profile = () => {
+    const { t: trans } = useTranslation()
     const {register, handleSubmit, formState: {errors}, reset, setError} = useForm()
     const [user, setUser] = useState([])
     const [loading, setLoading] = useState(false)
@@ -18,8 +20,8 @@ const Profile = () => {
             method: 'GET',
             headers: {
                 'Content-type' : 'application/json',
-                'Accept' : 'application/json',  
-                'Authorization' : `Bearer ${token}`              
+                'Accept' : 'application/json',
+                'Authorization' : `Bearer ${token}`
             }
         })
         .then(res => res.json())
@@ -43,10 +45,10 @@ const Profile = () => {
             method: 'POST',
             headers: {
                 'Content-type' : 'application/json',
-                'Accept' : 'application/json',  
-                'Authorization' : `Bearer ${token}`              
+                'Accept' : 'application/json',
+                'Authorization' : `Bearer ${token}`
             },
-            body: JSON.stringify(data)                 
+            body: JSON.stringify(data)
         })
         .then(res => res.json())
         .then(result => {
@@ -64,7 +66,7 @@ const Profile = () => {
 
     useEffect(() => {
         fetchUser()
-    },[]) 
+    },[])
 
     return (
         <Layout>
@@ -72,14 +74,14 @@ const Profile = () => {
              <div className='container pb-5 pt-3'>
 				<nav aria-label="breadcrumb">
 					<ol className="breadcrumb">
-						<li className="breadcrumb-item"><Link to="/account">Account</Link></li>
-						<li className="breadcrumb-item active" aria-current="page">Profile</li>
+						<li className="breadcrumb-item"><Link to="/account">{trans("common.account")}</Link></li>
+						<li className="breadcrumb-item active" aria-current="page">{trans("profile.title")}</li>
 					</ol>
 				</nav>
                 <div className='row'>
                     <div className='col-md-12 mt-5 mb-3'>
                         <div className='d-flex justify-content-between'>
-                            <h2 className='h4 mb-0 pb-0'>Profile</h2>
+                            <h2 className='h4 mb-0 pb-0'>{trans("profile.title")}</h2>
                         </div>
                     </div>
                     <div className='col-lg-3 account-sidebar'>
@@ -96,49 +98,49 @@ const Profile = () => {
                                         <div className='card-body'>
                                             <form onSubmit={handleSubmit(onSubmit)}>
                                                 <div className='mb-3'>
-                                                    <label className='form-label'>Name</label>
-                                                    <input type='text' 
+                                                    <label className='form-label'>{trans("profile.nameLabel")}</label>
+                                                    <input type='text'
                                                         {
                                                             ...register('name',{
-                                                                required: "The name field is required."
+                                                                required: trans("profile.nameRequired")
                                                             })
                                                         }
-                                                        className={`form-control ${errors.name && 'is-invalid'}`} 
-                                                        placeholder='Name' />
-                                                        
+                                                        className={`form-control ${errors.name && 'is-invalid'}`}
+                                                        placeholder={trans("profile.namePlaceholder")} />
+
                                                         {
                                                             errors.name && <p className='invalid-feedback'>{errors.name?.message}</p>
                                                         }
-                                                        
+
                                                 </div>
 
                                                 <div className='mb-3'>
-                                                    <label className='form-label'>Email</label>
-                                                    <input type='text' 
+                                                    <label className='form-label'>{trans("profile.emailLabel")}</label>
+                                                    <input type='text'
                                                         {
                                                             ...register('email',{
-                                                                required: "The email field is required.",
+                                                                required: trans("profile.emailRequired"),
                                                                 pattern: {
                                                                     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                                                                    message: "Invalid email address"
-                                                                } 
+                                                                    message: trans("profile.emailInvalid")
+                                                                }
                                                             })
                                                         }
-                                                        className={`form-control ${errors.email && 'is-invalid'}`} 
-                                                        placeholder='Email' />
-                                                        
+                                                        className={`form-control ${errors.email && 'is-invalid'}`}
+                                                        placeholder={trans("profile.emailPlaceholder")} />
+
                                                         {
                                                             errors.email && <p className='invalid-feedback'>{errors.email?.message}</p>
                                                         }
-                                                        
+
                                                 </div>
-                                                
-                                                <button className='btn btn-primary'>Update</button>
+
+                                                <button className='btn btn-primary'>{trans("profile.update")}</button>
                                             </form>
                                         </div>
                                     </div>
                                 }
-                               
+
 
                             </div>
                         </div>

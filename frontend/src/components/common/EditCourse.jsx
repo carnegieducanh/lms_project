@@ -1,19 +1,21 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 const EditCourse = ({course,deleteCourse}) => {
+  const { t: trans } = useTranslation()
   return (
     <div className="col-md-4">
         <div className='card border-0'>
             <div className='card-img-top'>
                 {
-                    course.status == 1 && <span className="fw-bold badge bg-success text-white position-absolute top-0 end-0 m-2">Published</span>
+                    course.status == 1 && <span className="fw-bold badge bg-success text-white position-absolute top-0 end-0 m-2">{trans("editCourse.published")}</span>
                 }
 
                 {
-                    course.status == 0 && <span className="fw-bold badge bg-light text-muted position-absolute top-0 end-0 m-2">Draft</span>
+                    course.status == 0 && <span className="fw-bold badge bg-light text-muted position-absolute top-0 end-0 m-2">{trans("editCourse.draft")}</span>
                 }
-                
+
                 {
                     course.course_small_image && <img src={course.course_small_image} alt="" className='img-fluid' />
                 }
@@ -21,7 +23,7 @@ const EditCourse = ({course,deleteCourse}) => {
                 {
                     course.course_small_image == '' && <img src={`https://placehold.co/600x350?text=${course.title}`} alt="" className='img-fluid' />
                 }
-                
+
 
             </div>
             <div className='card-body'>
@@ -30,7 +32,7 @@ const EditCourse = ({course,deleteCourse}) => {
                 </div>
                 <div className="meta d-flex py-2">
                     {
-                        course.level && 
+                        course.level &&
                         <div className="level">
                             <div class="d-flex align-items-center">
                                 <div class="icon">
@@ -40,7 +42,7 @@ const EditCourse = ({course,deleteCourse}) => {
                                 </div>
 
                                 <div class="text ps-2">{course.level.name}</div>
-                            </div>                                        
+                            </div>
                         </div>
                     }
                     <div className="student ps-4">
@@ -51,7 +53,7 @@ const EditCourse = ({course,deleteCourse}) => {
                                 </svg>
                             </div>
                             <div class="text ps-2">{course?.enrollments_count}</div>
-                        </div>                                          
+                        </div>
                     </div>
                     <div className="rating ps-4">
                         <div class="d-flex align-items-center">
@@ -61,15 +63,15 @@ const EditCourse = ({course,deleteCourse}) => {
                                 </svg>
                             </div>
                             <div class="text ps-2">{course?.rating}</div>
-                        </div>                                          
+                        </div>
                     </div>
                 </div>
             </div>
             <div className="card-footer bg-white">
                 <div className="d-flex py-2 justify-content-between align-items-center">
                     <div className="add-to-cart">
-                        <Link to={`/account/courses/edit/${course.id}`} className="btn btn-primary">Edit</Link>
-                        <Link onClick={() => deleteCourse(course.id)} className="btn btn-danger ms-2">Delete</Link>
+                        <Link to={`/account/courses/edit/${course.id}`} className="btn btn-primary">{trans("editCourse.edit")}</Link>
+                        <Link onClick={() => deleteCourse(course.id)} className="btn btn-danger ms-2">{trans("editCourse.delete")}</Link>
                     </div>
                 </div>
             </div>

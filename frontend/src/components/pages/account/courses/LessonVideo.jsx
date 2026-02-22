@@ -8,6 +8,7 @@ import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 import { apiUrl, token } from "../../../common/Config";
 import toast from "react-hot-toast";
 import ReactPlayer from "react-player";
+import { useTranslation } from "react-i18next";
 registerPlugin(
   FilePondPluginImageExifOrientation,
   FilePondPluginImagePreview,
@@ -15,6 +16,7 @@ registerPlugin(
 );
 
 const LessonVideo = ({ lesson }) => {
+  const { t: trans } = useTranslation();
   const [files, setFiles] = useState([]);
   const [videoUrl, setVideoUrl] = useState();
 
@@ -29,7 +31,7 @@ const LessonVideo = ({ lesson }) => {
       <div className="card shadow-lg border-0">
         <div className="card-body p-4">
           <div className="d-flex">
-            <h4 className="h5 mb-3">Lesson Video</h4>
+            <h4 className="h5 mb-3">{trans("editLesson.lessonVideo")}</h4>
           </div>
 
           <FilePond
@@ -58,7 +60,7 @@ const LessonVideo = ({ lesson }) => {
               },
             }}
             name="video"
-            labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
+            labelIdle={trans("editLesson.dragDrop")}
           />
 
           {videoUrl && (

@@ -9,8 +9,10 @@ import { LuMonitorPlay } from "react-icons/lu";
 import Loading from "../common/Loading";
 import FreePreview from "../common/FreePreview";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 const Detail = () => {
+  const { t: trans } = useTranslation();
   const [rating, setRating] = useState(4.0);
   const [loading, setLoading] = useState(true);
   const [course, setCourse] = useState(null);
@@ -70,7 +72,7 @@ const Detail = () => {
         if (status == 200) {
           toast.success(data.message);
         } else if (status == 401) {
-          toast.error("Please login to enroll in this course");
+          toast.error(trans("detail.loginToEnroll"));
           navigate("/account/login");
         } else {
           toast.error(data.message);
@@ -102,10 +104,10 @@ const Detail = () => {
           <nav aria-label="breadcrumb">
             <ol className="breadcrumb">
               <li className="breadcrumb-item">
-                <a href="/">Home</a>
+                <a href="/">{trans("courses.home")}</a>
               </li>
               <li className="breadcrumb-item">
-                <a href="/courses">Courses</a>
+                <a href="/courses">{trans("detail.breadcrumbCourses")}</a>
               </li>
               <li className="breadcrumb-item active" aria-current="page">
                 {course.title}
@@ -130,28 +132,28 @@ const Detail = () => {
                             <span className="fw-bold">Aug 2021</span>
                         </div> */}
                 <div className="col">
-                  <span className="text-muted d-block">Level</span>
+                  <span className="text-muted d-block">{trans("detail.level")}</span>
                   <span className="fw-bold">{course.level.name}</span>
                 </div>
                 <div className="col">
-                  <span className="text-muted d-block">Students</span>
+                  <span className="text-muted d-block">{trans("detail.students")}</span>
                   <span className="fw-bold">{course?.enrollments_count}</span>
                 </div>
                 <div className="col">
-                  <span className="text-muted d-block">Language</span>
+                  <span className="text-muted d-block">{trans("courses.language")}</span>
                   <span className="fw-bold">{course.language.name}</span>
                 </div>
               </div>
               <div className="row">
                 <div className="col-md-12 mt-4">
                   <div className="border bg-card rounded-3 p-4">
-                    <h3 className="mb-3  h4">Overview</h3>
+                    <h3 className="mb-3  h4">{trans("detail.overview")}</h3>
                     {course.description}
                   </div>
                 </div>
                 <div className="col-md-12 mt-4">
                   <div className="border bg-card rounded-3 p-4">
-                    <h3 className="mb-3 h4">What you will learn</h3>
+                    <h3 className="mb-3 h4">{trans("detail.whatYouWillLearn")}</h3>
                     <ul className="list-unstyled mt-3">
                       {course.outcomes &&
                         course.outcomes.map((outcome) => {
@@ -170,7 +172,7 @@ const Detail = () => {
 
                 <div className="col-md-12 mt-4">
                   <div className="border bg-card rounded-3 p-4">
-                    <h3 className="mb-3 h4">Requirements</h3>
+                    <h3 className="mb-3 h4">{trans("detail.requirements")}</h3>
                     <ul className="list-unstyled mt-3">
                       {course.requirements &&
                         course.requirements.map((requirement) => {
@@ -189,10 +191,10 @@ const Detail = () => {
 
                 <div className="col-md-12 mt-4">
                   <div className="border bg-card rounded-3 p-4">
-                    <h3 className="h4 mb-3">Course Structure</h3>
+                    <h3 className="h4 mb-3">{trans("detail.courseStructure")}</h3>
                     <p>
-                      {course.chapters_count} Chapters . {course.total_lessons}{" "}
-                      Lectures . {convertMinutesToHours(course.total_duration)}
+                      {course.chapters_count} {trans("detail.chapters")} . {course.total_lessons}{" "}
+                      {trans("detail.lectures")} . {convertMinutesToHours(course.total_duration)}
                     </p>
                     <Accordion defaultActiveKey="0" id="courseAccordion">
                       {course.chapters &&
@@ -202,7 +204,7 @@ const Detail = () => {
                               <Accordion.Header>
                                 {chapter.title}{" "}
                                 <span className="ms-3 text-muted">
-                                  ({chapter.lessons_count} lectures -{" "}
+                                  ({chapter.lessons_count} {trans("detail.lecturesShort")} -{" "}
                                   {convertMinutesToHours(
                                     chapter.lessons_sum_duration,
                                   )}
@@ -233,7 +235,7 @@ const Detail = () => {
                                                       }
                                                       className="text-white text-decoration-none"
                                                     >
-                                                      Preview
+                                                      {trans("common.preview")}
                                                     </Link>
                                                   </Badge>
                                                 )}
@@ -260,8 +262,8 @@ const Detail = () => {
 
                 <div className="col-md-12 mt-4">
                   <div className="border bg-card rounded-3 p-4">
-                    <h3 className="mb-3 h4">Reviews</h3>
-                    <p>Our student says about this course</p>
+                    <h3 className="mb-3 h4">{trans("detail.reviews")}</h3>
+                    <p>{trans("detail.reviewsSubtitle")}</p>
 
                     <div className="mt-4">
                       {course.reviews &&
@@ -312,24 +314,24 @@ const Detail = () => {
                       onClick={() => enrollCourse()}
                       className="btn btn-primary w-100"
                     >
-                      <i className="bi bi-ticket"></i> Enroll
+                      <i className="bi bi-ticket"></i> {trans("detail.enroll")}
                     </button>
                   </div>
                 </Card.Body>
                 <Card.Footer className="mt-4">
-                  <h6 className="fw-bold">This course includes</h6>
+                  <h6 className="fw-bold">{trans("detail.courseIncludes")}</h6>
                   <ListGroup variant="flush">
                     <ListGroup.Item className="ps-0">
                       <i className="bi bi-infinity text-primary me-2"></i>
-                      Full lifetime access
+                      {trans("detail.fullAccess")}
                     </ListGroup.Item>
                     <ListGroup.Item className="ps-0">
                       <i className="bi bi-tv text-primary me-2"></i>
-                      Access on mobile and TV
+                      {trans("detail.mobileAccess")}
                     </ListGroup.Item>
                     <ListGroup.Item className="ps-0">
                       <i className="bi bi-award-fill text-primary me-2"></i>
-                      Certificate of completion
+                      {trans("detail.certificate")}
                     </ListGroup.Item>
                   </ListGroup>
                 </Card.Footer>

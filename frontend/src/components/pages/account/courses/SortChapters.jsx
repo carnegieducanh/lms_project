@@ -3,8 +3,10 @@ import Modal from 'react-bootstrap/Modal';
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { apiUrl, token } from '../../../common/Config';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 
 const SortChapters = ({showChapterSortModal,handleCloseChapterSortModal,course,setChapters,chapters}) => {
+    const { t: trans } = useTranslation();
 
     const [chaptersData, setChaptersData] = useState([]);
 
@@ -50,7 +52,7 @@ const SortChapters = ({showChapterSortModal,handleCloseChapterSortModal,course,s
     <>
       <Modal size='lg' show={showChapterSortModal} onHide={handleCloseChapterSortModal}>
             <Modal.Header closeButton>
-                <Modal.Title>Sort Chapters</Modal.Title>
+                <Modal.Title>{trans("sortChapters.title")}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
             <DragDropContext onDragEnd={handleDragEnd} >

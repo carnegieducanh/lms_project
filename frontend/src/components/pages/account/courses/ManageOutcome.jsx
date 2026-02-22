@@ -7,10 +7,12 @@ import { MdDragIndicator } from "react-icons/md";
 import { BsPencilSquare } from "react-icons/bs";
 import { FaTrashAlt } from "react-icons/fa";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
+import { useTranslation } from "react-i18next";
 
 import UpdateOutcome from "./UpdateOutcome";
 
 const ManageOutcome = () => {
+  const { t: trans } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [outcomes, setOutcomes] = useState([]);
   const [outcomeData, setOutcomeData] = useState();
@@ -140,24 +142,24 @@ const ManageOutcome = () => {
       <div className="card shadow-lg border-0">
         <div className="card-body p-4">
           <div className="d-flex">
-            <h4 className="h5 mb-3">Outcome</h4>
+            <h4 className="h5 mb-3">{trans("manageOutcome.title")}</h4>
           </div>
           <form className="mb-4" onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-3">
               <input
                 {...register("outcome", {
-                  required: "The outcome field is required.",
+                  required: trans("manageOutcome.required"),
                 })}
                 type="text"
                 className={`form-control ${errors.outcome && "is-invalid"}`}
-                placeholder="Outcome"
+                placeholder={trans("manageOutcome.placeholder")}
               />
               {errors.outcome && (
                 <p className="invalid-feedback">{errors.outcome.message}</p>
               )}
             </div>
             <button disabled={loading} className="btn btn-primary">
-              {loading == false ? "Save" : "Please wait..."}
+              {loading == false ? trans("common.save") : trans("common.pleaseWait")}
             </button>
           </form>
 

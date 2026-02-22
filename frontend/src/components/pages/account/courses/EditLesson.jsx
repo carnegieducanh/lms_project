@@ -7,9 +7,11 @@ import { Link, useParams } from 'react-router-dom';
 import JoditEditor from 'jodit-react';
 import toast from 'react-hot-toast';
 import LessonVideo from './LessonVideo';
+import { useTranslation } from 'react-i18next';
 
 
 const EditLesson = ({placeholder}) => {
+    const { t: trans } = useTranslation();
     const { register, handleSubmit, formState: {errors}, reset} = useForm();
     const [loading, setLoading] = useState(false);
     const [chapters, setChapters] = useState();    
@@ -104,8 +106,8 @@ const EditLesson = ({placeholder}) => {
                     <div className='row'>
                         <div className='col-md-12 mt-5 mb-3'>
                             <div className='d-flex justify-content-between'>
-                                <h2 className='h4 mb-0 pb-0'>Edit Lesson</h2> 
-                                <Link to={`/account/courses/edit/${params.courseId}`} className='btn btn-primary'>Back</Link>                               
+                                <h2 className='h4 mb-0 pb-0'>{trans("editLesson.title")}</h2>
+                                <Link to={`/account/courses/edit/${params.courseId}`} className='btn btn-primary'>{trans("editLesson.back")}</Link>
                             </div>
                         </div>
                         <div className='col-lg-3 account-sidebar'>
@@ -117,19 +119,19 @@ const EditLesson = ({placeholder}) => {
                                     <form onSubmit={handleSubmit(onSubmit)}>
                                         <div className='card border-0 shadow-lg'>
                                             <div className='card-body p-4'>
-                                                <h4 className="h5 border-bottom pb-3 mb-3">Basic Information</h4>
+                                                <h4 className="h5 border-bottom pb-3 mb-3">{trans("editLesson.basicInfo")}</h4>
 
                                                 <div className='mb-3'>
-                                                    <label htmlFor="" className='form-label'>Title</label>
-                                                    <input 
+                                                    <label htmlFor="" className='form-label'>{trans("editLesson.titleLabel")}</label>
+                                                    <input
                                                         {
                                                             ...register('lesson',{
-                                                                required: "The title field is required."
+                                                                required: trans("editLesson.titleRequired")
                                                             })
                                                         }
-                                                    type="text"  
-                                                    className={`form-control ${errors.lesson && 'is-invalid'}`}                                                   
-                                                    placeholder='Title' />  
+                                                    type="text"
+                                                    className={`form-control ${errors.lesson && 'is-invalid'}`}
+                                                    placeholder={trans("editLesson.titlePlaceholder")} />  
                                                     {
                                                         errors.lesson && <p className='invalid-feedback'>{errors.lesson.message}</p>
                                                     }
@@ -137,17 +139,17 @@ const EditLesson = ({placeholder}) => {
                                                 </div>
 
                                                 <div className='mb-3'>
-                                                    <label htmlFor="" className='form-label'>Chapter</label>
-                                                    <select 
+                                                    <label htmlFor="" className='form-label'>{trans("editLesson.chapterLabel")}</label>
+                                                    <select
                                                         {
                                                             ...register('chapter_id',{
-                                                                required: "Please select a chapter."
+                                                                required: trans("editLesson.chapterRequired")
                                                             })
                                                         }
 
-                                                        className={`form-select ${errors.chapter_id && 'is-invalid'}`}  
+                                                        className={`form-select ${errors.chapter_id && 'is-invalid'}`}
                                                         >
-                                                        <option value="">Select a Chapter</option>
+                                                        <option value="">{trans("editLesson.selectChapter")}</option>
                                                         {                                                            
                                                             chapters && chapters.map(chapter => {
                                                                 return (
@@ -164,16 +166,16 @@ const EditLesson = ({placeholder}) => {
                                                 </div>
 
                                                 <div className='mb-3'>
-                                                    <label htmlFor="" className='form-label'>Duration(Mins)</label>
-                                                    <input 
+                                                    <label htmlFor="" className='form-label'>{trans("editLesson.durationLabel")}</label>
+                                                    <input
                                                          {
                                                             ...register('duration',{
-                                                                required: "The duration field is required."
+                                                                required: trans("editLesson.durationRequired")
                                                             })
                                                         }
-                                                        type="number" 
+                                                        type="number"
                                                         className={`form-control ${errors.duration && 'is-invalid'}`}
-                                                        placeholder='Duration' />  
+                                                        placeholder={trans("editLesson.durationPlaceholder")} />  
 
                                                     {
                                                         errors.duration && <p className='invalid-feedback'>{errors.duration.message}</p>
@@ -181,7 +183,7 @@ const EditLesson = ({placeholder}) => {
                                                 </div>
 
                                                 <div className='mb-3'>
-                                                    <label htmlFor="" className='form-label'>Description</label>
+                                                    <label htmlFor="" className='form-label'>{trans("editLesson.descriptionLabel")}</label>
 
                                                     <JoditEditor
                                                         ref={editor}
@@ -194,16 +196,16 @@ const EditLesson = ({placeholder}) => {
                                                 </div>
 
                                                 <div className='mb-3'>
-                                                    <label htmlFor="" className='form-label'>Status</label>
-                                                    <select 
+                                                    <label htmlFor="" className='form-label'>{trans("editLesson.statusLabel")}</label>
+                                                    <select
                                                         {
                                                             ...register('status',{
-                                                                required: "The status field is required."
+                                                                required: trans("editLesson.statusRequired")
                                                             })
                                                         }
                                                         className='form-select'>
-                                                        <option value="1">Active</option>
-                                                        <option value="0">Block</option>
+                                                        <option value="1">{trans("editLesson.active")}</option>
+                                                        <option value="0">{trans("editLesson.block")}</option>
                                                     </select>
                                                 </div>
                                                 
@@ -218,14 +220,14 @@ const EditLesson = ({placeholder}) => {
                                                         type="checkbox" 
                                                         id='freeLesson'
                                                        />
-                                                    <label className="form-check-label ms-2" htmlFor="freeLesson">Free Lesson</label>
+                                                    <label className="form-check-label ms-2" htmlFor="freeLesson">{trans("editLesson.freeLesson")}</label>
                                                 </div>
 
                                                  <button 
                                                     disabled={loading} 
                                                     type='submit' className='btn btn-primary mt-3'>
                                                     {
-                                                        loading ? 'Please wait...' : 'Update'
+                                                        loading ? trans("common.pleaseWait") : trans("editLesson.update")
                                                     }
                                                 </button>
                                                

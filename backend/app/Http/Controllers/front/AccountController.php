@@ -438,4 +438,30 @@ class AccountController extends Controller
             "message" => "Password has been updated successfully."
         ], 200);
     }
+
+    public function dashboardStats(Request $request)
+    {
+        $userId = $request->user()->id;
+
+        // Total registered users in the system
+        $totalUsers = User::count();
+
+        // Total distinct users enrolled in courses created by this instructor
+        $courseIds = Course::where('user_id', $userId)->pluck('id');
+        $enrolledUsers = Enrollment::whereIn('course_id', $courseIds)
+            ->distinct('user_id')
+            ->count('user_id');
+
+        // Active (published) courses created by this instructor
+        $activeCourses = Course::where('user_id', $userId)
+            ->where('status', 1)
+            ->count();
+
+        return response()->json([
+            'status' => 200,
+            'totalUsers'    => $totalUsers,
+            'enrolledUsers' => $enrolledUsers,
+            'activeCourses' => $activeCourses,
+        ], 200);
+    }
 }

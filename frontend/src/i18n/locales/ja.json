@@ -70,7 +70,11 @@
     "selectLanguage": "言語を選択",
     "descriptionLabel": "説明",
     "update": "更新する",
-    "pleaseWait": "処理中..."
+    "pleaseWait": "処理中...",
+    "published": "公開済み",
+    "draft": "下書き",
+    "edit": "編集",
+    "delete": "削除"
   },
   "enrollment": {
     "watchNow": "今すぐ見る",
@@ -88,6 +92,158 @@
   "common": {
     "readMore": "詳細を見る",
     "logoutSuccess": "ログアウトしました！",
-    "loading": "読み込み中..."
+    "loading": "読み込み中...",
+    "save": "保存",
+    "delete": "削除",
+    "edit": "編集",
+    "pleaseWait": "処理中...",
+    "account": "アカウント",
+    "preview": "プレビュー"
+  },
+  "footer": {
+    "description": "学習管理システムに参加して、スキルアップとキャリアの成長に役立つ幅広いコースをご覧ください。",
+    "popularCategories": "人気カテゴリー",
+    "quickLinks": "クイックリンク",
+    "login": "ログイン",
+    "register": "登録",
+    "myAccount": "マイアカウント",
+    "courses": "コース",
+    "copyright": "© 2025 All Rights Reserved"
+  },
+  "profile": {
+    "title": "プロフィール",
+    "nameLabel": "お名前",
+    "emailLabel": "メールアドレス",
+    "namePlaceholder": "お名前",
+    "emailPlaceholder": "メールアドレス",
+    "nameRequired": "お名前は必須です。",
+    "emailRequired": "メールアドレスは必須です。",
+    "emailInvalid": "無効なメールアドレスです",
+    "update": "更新する"
+  },
+  "changePassword": {
+    "title": "パスワード変更",
+    "oldPassword": "現在のパスワード",
+    "newPassword": "新しいパスワード",
+    "confirmPassword": "パスワードの確認",
+    "oldPlaceholder": "現在のパスワード",
+    "newPlaceholder": "新しいパスワード",
+    "confirmPlaceholder": "新しいパスワード",
+    "oldRequired": "現在のパスワードは必須です。",
+    "newRequired": "新しいパスワードは必須です。",
+    "confirmRequired": "パスワードの確認を入力してください。",
+    "passwordMismatch": "パスワードが一致しません。",
+    "btn": "パスワードを変更"
+  },
+  "dashboard": {
+    "title": "ダッシュボード",
+    "totalUsers": "会員数",
+    "enrolledUsers": "受講者数",
+    "activeCourses": "公開中のコース",
+    "viewCourses": "コースを見る"
+  },
+  "manageChapter": {
+    "title": "チャプター",
+    "addLesson": "レッスンを追加",
+    "reorderChapters": "チャプターを並び替え",
+    "chapterPlaceholder": "チャプター",
+    "chapterRequired": "チャプターは必須です。",
+    "lessons": "レッスン",
+    "reorderLessons": "レッスンを並び替え",
+    "deleteChapter": "チャプターを削除",
+    "updateChapter": "チャプターを更新"
+  },
+  "manageOutcome": {
+    "title": "学習成果",
+    "placeholder": "学習成果",
+    "required": "学習成果は必須です。"
+  },
+  "manageRequirement": {
+    "title": "受講要件",
+    "placeholder": "受講要件",
+    "required": "受講要件は必須です。"
+  },
+  "updateChapter": {
+    "title": "チャプターを更新",
+    "label": "チャプター",
+    "placeholder": "チャプター",
+    "required": "チャプターは必須です。"
+  },
+  "updateOutcome": {
+    "title": "学習成果を更新",
+    "label": "学習成果",
+    "placeholder": "学習成果",
+    "required": "学習成果は必須です。"
+  },
+  "updateRequirement": {
+    "title": "受講要件を更新",
+    "label": "受講要件",
+    "placeholder": "受講要件",
+    "required": "受講要件は必須です。"
+  },
+  "createLesson": {
+    "title": "レッスンを作成",
+    "chapter": "チャプター",
+    "selectChapter": "チャプターを選択",
+    "chapterRequired": "チャプターを選択してください。",
+    "lesson": "レッスン",
+    "lessonPlaceholder": "レッスン",
+    "lessonRequired": "レッスンは必須です。",
+    "status": "ステータス",
+    "active": "公開",
+    "block": "非公開",
+    "statusRequired": "ステータスは必須です。"
+  },
+  "sortChapters": {
+    "title": "チャプターの並び替え"
+  },
+  "editLesson": {
+    "title": "レッスンを編集",
+    "back": "戻る",
+    "basicInfo": "基本情報",
+    "titleLabel": "タイトル",
+    "titleRequired": "タイトルは必須です。",
+    "titlePlaceholder": "タイトル",
+    "chapterLabel": "チャプター",
+    "chapterRequired": "チャプターを選択してください。",
+    "selectChapter": "チャプターを選択",
+    "durationLabel": "所要時間（分）",
+    "durationRequired": "所要時間は必須です。",
+    "durationPlaceholder": "所要時間",
+    "descriptionLabel": "説明",
+    "statusLabel": "ステータス",
+    "active": "公開",
+    "block": "非公開",
+    "statusRequired": "ステータスは必須です。",
+    "freeLesson": "無料レッスン",
+    "update": "更新する",
+    "lessonVideo": "レッスン動画",
+    "dragDrop": "ファイルをドラッグ＆ドロップ、または <span class=\"filepond--label-action\">ファイルを選択</span>"
+  },
+  "detail": {
+    "breadcrumbCourses": "コース一覧",
+    "level": "レベル",
+    "students": "受講者数",
+    "overview": "概要",
+    "whatYouWillLearn": "学習内容",
+    "requirements": "受講要件",
+    "courseStructure": "コース構成",
+    "chapters": "チャプター",
+    "lectures": "講義",
+    "lecturesShort": "講義",
+    "reviews": "レビュー",
+    "reviewsSubtitle": "受講者の声",
+    "enroll": "受講する",
+    "loginToEnroll": "受講するにはログインしてください",
+    "courseIncludes": "このコースに含まれるもの",
+    "fullAccess": "永久アクセス権",
+    "mobileAccess": "モバイル・TVでの視聴",
+    "certificate": "修了証明書"
+  },
+  "time": {
+    "hr": "時間",
+    "hrs": "時間",
+    "min": "分",
+    "mins": "分"
   }
 }

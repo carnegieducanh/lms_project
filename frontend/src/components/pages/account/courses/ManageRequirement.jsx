@@ -8,8 +8,10 @@ import { BsPencilSquare } from "react-icons/bs";
 import { FaTrashAlt } from "react-icons/fa";
 import UpdateRequirement from './UpdateRequirement';
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
+import { useTranslation } from 'react-i18next';
 
 const ManageRequirement = () => {
+    const { t: trans } = useTranslation();
     const [loading, setLoading] = useState(false);
     const [requirements, setRequirements] = useState([]);
     const [requirementData, setRequirementData] = useState();
@@ -132,27 +134,27 @@ const ManageRequirement = () => {
       <div className='card shadow-lg border-0 mt-4'>
             <div className='card-body p-4'>
                 <div className="d-flex">
-                    <h4 className="h5 mb-3">Requirement</h4>
+                    <h4 className="h5 mb-3">{trans("manageRequirement.title")}</h4>
                 </div>
                 <form className='mb-4' onSubmit={handleSubmit(onSubmit)}>
                     <div className='mb-3'>
-                        <input 
+                        <input
                             {
                                 ...register("requirement",{
-                                    required: "The requirement field is required."
+                                    required: trans("manageRequirement.required")
                                 })
                             }
-                            type="text" 
+                            type="text"
                             className={`form-control ${errors.requirement && 'is-invalid'}` }
-                            placeholder='Requirement' />
+                            placeholder={trans("manageRequirement.placeholder")} />
                             {
                                 errors.requirement && <p className='invalid-feedback'>{errors.requirement.message}</p>
                             }
                     </div>
-                    <button 
+                    <button
                         disabled={loading}
                         className='btn btn-primary'>
-                        { loading == false ? 'Save' : 'Please wait...'}
+                        { loading == false ? trans("common.save") : trans("common.pleaseWait")}
                     </button>
                 </form>
 
