@@ -103,6 +103,14 @@
   "footer": {
     "description": "Join our Learning Management System and explore a wide range of courses to enhance your skills and achieve your goals.",
     "popularCategories": "Popular Categories",
+    "categories": {
+      "newEmployee": "New Employee Training",
+      "allEmployee": "Mandatory Training for All",
+      "itSecurity": "IT & Security Training",
+      "healthSafety": "Health & Safety Training",
+      "management": "Management Training",
+      "skillDevelopment": "Skill Development Training"
+    },
     "quickLinks": "Quick Links",
     "login": "Login",
     "register": "Register",

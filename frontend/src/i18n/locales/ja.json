@@ -103,6 +103,14 @@
   "footer": {
     "description": "学習管理システムに参加して、スキルアップとキャリアの成長に役立つ幅広いコースをご覧ください。",
     "popularCategories": "人気カテゴリー",
+    "categories": {
+      "newEmployee": "新入社員研修",
+      "allEmployee": "全社員必須研修",
+      "itSecurity": "IT・セキュリティ研修",
+      "healthSafety": "安全衛生研修",
+      "management": "管理職研修",
+      "skillDevelopment": "スキル向上研修"
+    },
     "quickLinks": "クイックリンク",
     "login": "ログイン",
     "register": "登録",

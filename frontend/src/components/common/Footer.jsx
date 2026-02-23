@@ -18,22 +18,22 @@ const Footer = () => {
             <h2>{trans("footer.popularCategories")}</h2>
             <ul>
               <li>
-                <a href="#">新入社員研修</a>
+                <a href="#">{trans("footer.categories.newEmployee")}</a>
               </li>
               <li>
-                <a href="#">全社員必須研修</a>
+                <a href="#">{trans("footer.categories.allEmployee")}</a>
               </li>
               <li>
-                <a href="#">IT・セキュリティ研修</a>
+                <a href="#">{trans("footer.categories.itSecurity")}</a>
               </li>
               <li>
-                <a href="#">安全衛生研修</a>
+                <a href="#">{trans("footer.categories.healthSafety")}</a>
               </li>
               <li>
-                <a href="#">管理職研修</a>
+                <a href="#">{trans("footer.categories.management")}</a>
               </li>
               <li>
-                <a href="#">スキル向上研修</a>
+                <a href="#">{trans("footer.categories.skillDevelopment")}</a>
               </li>
             </ul>
           </div>
