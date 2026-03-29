@@ -3,8 +3,8 @@ import { initReactI18next } from 'react-i18next';
 import en from './locales/en.json';
 import ja from './locales/ja.json';
 
-// Đọc ngôn ngữ đã lưu từ localStorage, mặc định là tiếng Anh
-const savedLanguage = localStorage.getItem('appLanguage') || 'en';
+// Đọc ngôn ngữ đã lưu từ localStorage, mặc định là tiếng Nhật
+const savedLanguage = localStorage.getItem('appLanguage') || 'ja';
 
 i18n
   // Kết nối i18next với React thông qua plugin initReactI18next
